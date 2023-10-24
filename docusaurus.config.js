@@ -33,6 +33,11 @@ const docs = [
     path: 'docs/restapi',
     routeBasePath: '/restapi',
   },
+  {
+    id: 'openim-sdk',
+    path: 'docs/openim-sdk',
+    routeBasePath: '/openim-sdk',
+  },
 ];
 
 /** @type {import('@docusaurus/plugin-content-docs').Options} */
@@ -139,6 +144,10 @@ const config = {
           {
             label: 'API Reference',
             to: 'restapi/introduction',
+          },
+          {
+            label: 'OpenIM-SDK',
+            to: 'openim-sdk/introduction',
           },
           {
             type: 'search',
