@@ -6,13 +6,13 @@ sidebar_position: 1
 
 ## [消息类型](docs/sdks/enum/messageContentType.mdx)
 
-| 枚举值 | 描述               |
-| ------ | ------------------ |
+| 枚举值 | 描述                 |
+| ------ | -------------------- |
 | 123    | 转账消息             |
 | 124    | 红包消息             |
-| 2401   | 红包已领完通知         |
-| 2402   | 红包已过期通知         |
-| 2403   | 用户领取了红包通知     |
+| 2401   | 红包已领完通知       |
+| 2402   | 红包已过期通知       |
+| 2403   | 用户领取了红包通知   |
 | 1602   | 邀请语音通话通知     |
 | 1611   | 群语音卡片消息       |
 | 1603   | 接受语音通话通知     |
@@ -41,19 +41,19 @@ sidebar_position: 1
 ### 函数原型
 
 ```go showLineNumbers
-func CreateTransferMessage(operationID string, transferInfo string) string 
+func CreateTransferMessage(operationID string, transferInfo string) string
 ```
 
-### 输入参数 
+### 输入参数
 
 [TransferElem](docs/sdks/class/message/transferElem.mdx)
 
-| 参数名称 | 参数类型 | 是否必填 | 描述     |
-| -------- | -------- | -------- | -------- |
-| tokenLogo     | string    | 是        | 代币logo url      |
-| amount        | float64   | 是        | 金额              |
-| token         | string    | 是        | 代币名称          |
-| transactionID | string    | 是        | 业务端转账交易id   |
+| 参数名称      | 参数类型 | 是否必填 | 描述              |
+| ------------- | -------- | -------- | ----------------- |
+| tokenLogo     | string   | 是       | 代币 logo url     |
+| amount        | float64  | 是       | 金额              |
+| token         | string   | 是       | 代币名称          |
+| transactionID | string   | 是       | 业务端转账交易 id |
 
 ### 返回结果
 
@@ -82,14 +82,14 @@ func CreateTransferMessage(operationID string, transferInfo string) string
 func CreateRedPacketMessage(operationID string, redPacketInfo string) string
 ```
 
-### 输入参数 
+### 输入参数
 
 [RedPacketElem](docs/sdks/class/message/redPacketElem.mdx)
 
-| 参数名称 | 参数类型 | 是否必填 | 描述     |
-| -------- | -------- | -------- | -------- |
-| redPacketID     | string    | 是        | 业务方红包id      |
-| greetings       | string    | 是        | 祝福文案          |
+| 参数名称    | 参数类型 | 是否必填 | 描述          |
+| ----------- | -------- | -------- | ------------- |
+| redPacketID | string   | 是       | 业务方红包 id |
+| greetings   | string   | 是       | 祝福文案      |
 
 ### 返回结果
 
@@ -111,8 +111,123 @@ func CreateRedPacketMessage(operationID string, redPacketInfo string) string
 
 [RedPacketInfo](docs/sdks/class/message/redPacketInfo.mdx)
 
-| 名称 | 类型                                               | 描述     |
-| ---- | -------------------------------------------------- | -------- |
-| messageID    | string | 消息id |
-| redPacketID  | string | 消息id |
-| claimUser    | [PublicInfo](docs/sdks/class/user/publicInfo.mdx)| 领取用户 |
+| 名称        | 类型                                              | 描述     |
+| ----------- | ------------------------------------------------- | -------- |
+| messageID   | string                                            | 消息 id  |
+| redPacketID | string                                            | 消息 id  |
+| claimUser   | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 领取用户 |
+
+## 语音通话
+
+### 功能介绍
+
+:::info 说明
+语音通话功能基于声网实现，调用声网 sdk joinChannel 创建并加入频道。在 App ID 一致的前提下，传入相同频道名的用户会进入同一个频道
+
+openim 只提供操作信令的收发
+:::
+
+当用户执行邀请、拒绝、取消、挂断等操作时，被邀请方会收到相应的信令事件回调
+
+所以首先要实现[SignalingListener](/docs/sdks/listener/signaling.mdx)接口的所有方法，同时需要调用以下方法把事件回调注册到 openim 中
+
+```go showLineNumbers
+// android举例
+Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
+```
+
+### 信令数据结构
+
+所有信令事件回调返回统一数据结构
+
+[SignalInfo](docs/sdks/class/message/SingalInfo.mdx)
+
+| 名称             | 类型                                              | 描述                 |
+| ---------------- | ------------------------------------------------- | -------------------- |
+| channelID        | string                                            | 频道 id              |
+| user             | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户                 |
+| remainingSeconds | int32                                             | 语音房剩余时间(秒)   |
+| elapsedSeconds   | int32                                             | 语音房持续时间       |
+| micphoneStatus   | int32                                             | 麦克风状态 1 开/2 关 |
+
+### 代码示例
+
+```go
+// android举例
+Open_im_sdk.signalingInvite(BaseImpl.stringBase(base), ParamsUtil.buildOperationID(), JsonUtil.toString(uidList))
+```
+
+### 单聊邀请
+
+```go
+func SignalingInvite(callback open_im_sdk_callback.Base, operationID string, userIDList string)
+```
+
+### 群聊邀请
+
+```go
+func SignalingInviteInGroup(callback open_im_sdk_callback.Base, operationID string, userIDList string, groupID string)
+```
+
+群聊邀请，除了被邀请人会收到邀请通知，群内同时也会推送卡片消息，卡片消息数据结构如下，卡片消息 contentType 为 1611
+
+[SignalVoiceCallElem](docs/sdks/class/message/.mdx)
+
+| 名称       | 类型                                              | 描述          |
+| ---------- | ------------------------------------------------- | ------------- |
+| channelID  | string                                            | 频道 id       |
+| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户数组      |
+| status     | int32                                             | 1/正常 2/关闭 |
+| CreateTime | int64                                             | 创建时间      |
+
+### 拒绝邀请
+
+```go
+func SignalingReject(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string)
+```
+如果是单聊，同时会推送拒绝消息，contentType为1612
+
+### 接受邀请
+
+```go
+func SignalingAccept(callback open_im_sdk_callback.Base, operationID string, channelID string)
+```
+
+### 加入群语音房
+
+```go
+func SignalingJoin(callback open_im_sdk_callback.Base, operationID string, channelID string, groupID string)
+```
+如果是群聊，同时群内会推送用户加入语音房消息，contentType为1613
+
+### 取消邀请
+
+```go
+func SignalingCancel(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string, cancelUserID string)
+```
+如果是单聊，同时会推送取消消息，contentType为1614
+
+### 挂断
+
+```go
+func SignalingHungUp(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string)
+```
+
+### 关闭语音房
+
+```go
+func SignalingClose(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string)
+```
+如果是单聊，同时会推送关闭消息，contentType为1615
+
+### 更新麦克风状态
+
+```go
+func UpdateMichoneStatus(callback open_im_sdk_callback.Base, operationID string, channelID string, status int)
+```
+
+### 更新说话状态
+
+```go
+func UpdateSpeakStatus(callback open_im_sdk_callback.Base, operationID string, channelID string)
+```
