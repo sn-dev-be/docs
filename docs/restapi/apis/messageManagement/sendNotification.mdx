@@ -41,17 +41,8 @@ hide_title: true
   "senderNickname": "Gordon",
   "senderFaceURL": "http://www.head.com",
   "senderPlatformID": 1,
-  "transferNotificationTips": {
-    "sendID": "发起者ID",
-    "recvID ": "接受者ID",
-    "coinNum": "货币数量",
-    "coinType": "货币单位",
-    "content": "",
-    "transactionStatus": 1,
-    "transactionType": 1,
-    "transactionHash": "0xabc"
-  },
-  "contentType": 2002,
+  "content": "{\"sendID\":\"openIMAdmin\",\"sendNickname\":\"openIMAdmin\",\"recvID\":\"65129c018cf7320debfac1af\",\"recvNickname\":\"65129c018cf7320debfac1af\",\"coinNum\":\"500\",\"coinType\":\"ETH\",\"content\":\"充值详情\",\"transactionStatus\":1,\"transactionType\":1,\"transactionHash\":\"0xabc\"}",
+  "contentType": 2005,
   "sessionType": 1,
   "isOnlineOnly": false,
   "notOfflinePush": false,
@@ -62,42 +53,36 @@ hide_title: true
     "iOSPushSound": "default",
     "iOSBadgeCount": true
   },
-  "notificationOptions":{
-    "isSendMsg":true,
+  "notificationOptions": {
+    "isSendMsg": true,
     "reliabilityLevel": 1,
-    "isUnreadCount":true
+    "isUnreadCount": true
   }
 }
 ```
 
-| 字段名                         | 选填 | 类型    | 说明                                                                                                                                               |
-| :----------------------------- | :--- | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| sendID                         | 必填 | string  | 发送者 ID(interactionAdmin-互动通知账户, payAdmin-支付通知发送账户, tribeAdmin-部落通知发送账户)                                                   |
-| recvID                         | 选填 | string  | 接收者 ID，sessionType1 或者 4，必填，为接收方用户 ID，如果是群聊则不填                                                                            |
-| groupID                        | 选填 | string  | 群聊 ID，sessionType2 或者 3，必填，如果为单聊则不填                                                                                               |
-| senderNickname                 | 选填 | string  | 发送者昵称                                                                                                                                         |
-| senderFaceURL                  | 选填 | string  | 发送者头像                                                                                                                                         |
-| senderPlatformID               | 选填 | int     | 发送者平台号，模拟用户发送时填写， 1-&gt;IOS,2-&gt;Android,3-&gt;Windows,4-&gt;OSX,5-&gt;Web,5-&gt;MiniWeb,7-&gt;Linux,8-&gt;AndroidPad,9-&gt;IPad |
-| transferElem                   | 选填 | object  | 转账通知内容,如果选用该模版，下列字段为必填项目                                                                                                    |
-| transferElem.sendID            | 选填 | string  | 发送者 ID                                                                                                                                          |
-| transferElem.recvID            | 选填 | string  | 接收者 ID                                                                                                                                          |
-| transferElem.SenderNickname    | 选填 | string  | 发送者昵称                                                                                                                                         |
-| transferElem.RecvNickname      | 选填 | string  | 接收者昵称                                                                                                                                         |
-| transferElem.coinNum           | 必填 | string  | 货币数量                                                                                                                                           |
-| transferElem.coinType          | 必填 | string  | 货币单位                                                                                                                                           |
-| transferElem.content           | 选填 | string  | 描述                                                                                                                                               |
-| transferElem.transactionStatus | 必填 | string  | 转账状态 1-成功 2-失败                                                                                                                             |
-| transferElem.transactionType   | 必填 | string  | 通知的类型 1-钱包 2-红包                                                                                                                           |
-| transferElem.transactionHash   | 必填 | string  | 交易 hash                                                                                                                                          |
-| sessionType                    | 必填 | int     | 会话类型，发送的消息是单聊还是群聊,单聊为 1，群聊（普通写扩散）为 2,大群(读扩散接口)为 3，通知会话为 4                                             |
-| isOnlineOnly                   | 选填 | boolean | 该字段设置为 true 时候，发送的消息服务器不会存储，接收者在线才会收到，不在线该消息丢失                                                             |
-| notOfflinePush                 | 选填 | string  | 该字段设置为 true 时候，发送的消息在用户离线时将不会进行离线推送                                                                                   |
-| offlinePushInfo                | 选填 | object  | 离线推送的具体内容，如果不填写，使用服务器默认推送标题                                                                                             |
-| offlinePushInfo.title          | 选填 | string  | 推送的标题                                                                                                                                         |
-| offlinePushInfo.desc           | 选填 | string  | 推送的具体描述                                                                                                                                     |
-| offlinePushInfo.ex             | 选填 | string  | 扩展字段                                                                                                                                           |
-| offlinePushInfo.iOSPushSound   | 选填 | string  | IOS 的推送声音                                                                                                                                     |
-| offlinePushInfo.iOSBadgeCount  | 选填 | string  | IOS 推送消息是否计入桌面图标未读数                                                                                                                 |
+| 字段名                               | 选填 | 类型    | 说明                                                                                                                                               |
+| :----------------------------------- | :--- | :------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- |
+| sendID                               | 必填 | string  | 发送者 ID(interactionAdmin-互动通知账户, payAdmin-支付通知发送账户, tribeAdmin-部落通知发送账户)                                                   |
+| recvID                               | 选填 | string  | 接收者 ID，sessionType1 或者 4，必填，为接收方用户 ID，如果是群聊则不填                                                                            |
+| groupID                              | 选填 | string  | 群聊 ID，sessionType2 或者 3，必填，如果为单聊则不填                                                                                               |
+| senderNickname                       | 选填 | string  | 发送者昵称                                                                                                                                         |
+| senderFaceURL                        | 选填 | string  | 发送者头像                                                                                                                                         |
+| senderPlatformID                     | 选填 | int     | 发送者平台号，模拟用户发送时填写， 1-&gt;IOS,2-&gt;Android,3-&gt;Windows,4-&gt;OSX,5-&gt;Web,5-&gt;MiniWeb,7-&gt;Linux,8-&gt;AndroidPad,9-&gt;IPad |
+| content                              | 选填 | string  | 通知内容,根据不同的 contentType, 填入对应 json 字符串，[消息类型格式描述](docs/restapi/notificationDescription.mdx)文档  ｜                         |
+| contentType                          | 必填 | int     | [消息类型](docs/restapi/notificationDescription.mdx)                                                                                               |     |     |
+| sessionType                          | 必填 | int     | 会话类型，发送的消息是单聊还是群聊,单聊为 1，群聊（普通写扩散）为 2,大群(读扩散接口)为 3，通知会话为 4                                             |
+| isOnlineOnly                         | 选填 | boolean | 该字段设置为 true 时候，发送的消息服务器不会存储，接收者在线才会收到，不在线该消息丢失                                                             |
+| notOfflinePush                       | 选填 | string  | 该字段设置为 true 时候，发送的消息在用户离线时将不会进行离线推送                                                                                   |
+| offlinePushInfo                      | 选填 | object  | 离线推送的具体内容，如果不填写，使用服务器默认推送标题                                                                                             |
+| offlinePushInfo.title                | 选填 | string  | 推送的标题                                                                                                                                         |
+| offlinePushInfo.desc                 | 选填 | string  | 推送的具体描述                                                                                                                                     |
+| offlinePushInfo.ex                   | 选填 | string  | 扩展字段                                                                                                                                           |
+| offlinePushInfo.iOSPushSound         | 选填 | string  | IOS 的推送声音                                                                                                                                     |
+| offlinePushInfo.iOSBadgeCount        | 选填 | string  | IOS 推送消息是否计入桌面图标未读数                                                                                                                 |
+| notificationOptions.isSendMsg        | 必填 | boolean | 是否同步发送消息， 默认传 true                                                                                                                     |
+| notificationOptions.reliabilityLevel | 必填 | string  | 1-online, 2-persisent, 默认用 1                                                                                                                    |
+| notificationOptions.isUnreadCount    | 必填 | boolean | 是否记入未读消息数， 默认用 true                                                                                                                   |
 
 ### 成功返回示例
 
