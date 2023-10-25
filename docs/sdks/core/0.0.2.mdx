@@ -1,0 +1,118 @@
+---
+title: 0.0.2
+hide_title: false
+sidebar_position: 1
+---
+
+## [消息类型](docs/sdks/enum/messageContentType.mdx)
+
+| 枚举值 | 描述               |
+| ------ | ------------------ |
+| 123    | 转账消息             |
+| 124    | 红包消息             |
+| 2401   | 红包已领完通知         |
+| 2402   | 红包已过期通知         |
+| 2403   | 用户领取了红包通知     |
+| 1602   | 邀请语音通话通知     |
+| 1611   | 群语音卡片消息       |
+| 1603   | 接受语音通话通知     |
+| 1604   | 拒绝语音通话通知     |
+| 1612   | 拒绝语音通话单聊消息 |
+| 1605   | 加入语音通话通知     |
+| 1613   | 群语音加入消息       |
+| 1606   | 取消语音通话通知     |
+| 1614   | 取消语音通话单聊消息 |
+| 1607   | 挂掉语音通话通知     |
+| 1615   | 关闭语音通话单聊消息 |
+| 1609   | 关闭语音通话通知     |
+| 1608   | 麦克风状态改变通知   |
+| 1610   | 说话状态改变通知     |
+
+## 转账
+
+### 功能介绍
+
+:::info 说明
+
+创建转账消息，只有单聊可以转账
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func CreateTransferMessage(operationID string, transferInfo string) string 
+```
+
+### 输入参数 
+
+[TransferElem](docs/sdks/class/message/transferElem.mdx)
+
+| 参数名称 | 参数类型 | 是否必填 | 描述     |
+| -------- | -------- | -------- | -------- |
+| tokenLogo     | string    | 是        | 代币logo url      |
+| amount        | float64   | 是        | 金额              |
+| token         | string    | 是        | 代币名称          |
+| transactionID | string    | 是        | 业务端转账交易id   |
+
+### 返回结果
+
+| 名称 | 类型                                               | 描述     |
+| ---- | -------------------------------------------------- | -------- |
+| ~    | [Message](docs/sdks/class/message/messageInfo.mdx) | 成功返回 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.createTransferMessage(ParamsUtil.buildOperationID(), JsonUtil.toString(transferElem))
+```
+
+## 红包
+
+### 功能介绍
+
+:::info 说明
+
+创建红包消息，当红包领完、过期、被某用户领取都会接收到通知消息推送
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func CreateRedPacketMessage(operationID string, redPacketInfo string) string
+```
+
+### 输入参数 
+
+[RedPacketElem](docs/sdks/class/message/redPacketElem.mdx)
+
+| 参数名称 | 参数类型 | 是否必填 | 描述     |
+| -------- | -------- | -------- | -------- |
+| redPacketID     | string    | 是        | 业务方红包id      |
+| greetings       | string    | 是        | 祝福文案          |
+
+### 返回结果
+
+| 名称 | 类型                                               | 描述     |
+| ---- | -------------------------------------------------- | -------- |
+| ~    | [Message](docs/sdks/class/message/messageInfo.mdx) | 成功返回 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.createRedPacketMessage(ParamsUtil.buildOperationID(), JsonUtil.toString(redPacketElem))
+```
+
+### 通知事件
+
+当红包领完(2401)、过期(2402)、被某用户领取(2403)业务端都会推送对应通知，客户端在`OnRecvNewMessage`事件回调中将会收到通知事件消息
+
+红包通知统一返回以下数据结构
+
+[RedPacketInfo](docs/sdks/class/message/redPacketInfo.mdx)
+
+| 名称 | 类型                                               | 描述     |
+| ---- | -------------------------------------------------- | -------- |
+| messageID    | string | 消息id |
+| redPacketID  | string | 消息id |
+| claimUser    | [PublicInfo](docs/sdks/class/user/publicInfo.mdx)| 领取用户 |
