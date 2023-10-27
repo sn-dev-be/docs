@@ -27,6 +27,14 @@ sidebar_position: 1
 | 1609   | 关闭语音通话通知     |
 | 1608   | 麦克风状态改变通知   |
 | 1610   | 说话状态改变通知     |
+| 2002   | 转账成功通知         |
+| 2003   | 转账失败通知         |
+| 2004   | 充值成功通知         |
+| 2005   | 充值失败通知         |
+| 2006   | 提现成功通知         |
+| 2007   | 提现失败通知         |
+| 2008   | 红包超时通知         |
+| 2009   | 收到转账通知         |
 
 ## 转账
 
@@ -185,7 +193,8 @@ func SignalingInviteInGroup(callback open_im_sdk_callback.Base, operationID stri
 ```go
 func SignalingReject(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string)
 ```
-如果是单聊，同时会推送拒绝消息，contentType为1612
+
+如果是单聊，同时会推送拒绝消息，contentType 为 1612
 
 ### 接受邀请
 
@@ -198,14 +207,16 @@ func SignalingAccept(callback open_im_sdk_callback.Base, operationID string, cha
 ```go
 func SignalingJoin(callback open_im_sdk_callback.Base, operationID string, channelID string, groupID string)
 ```
-如果是群聊，同时群内会推送用户加入语音房消息，contentType为1613
+
+如果是群聊，同时群内会推送用户加入语音房消息，contentType 为 1613
 
 ### 取消邀请
 
 ```go
 func SignalingCancel(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string, cancelUserID string)
 ```
-如果是单聊，同时会推送取消消息，contentType为1614
+
+如果是单聊，同时会推送取消消息，contentType 为 1614
 
 ### 挂断
 
@@ -218,7 +229,8 @@ func SignalingHungUp(callback open_im_sdk_callback.Base, operationID string, cha
 ```go
 func SignalingClose(callback open_im_sdk_callback.Base, operationID string, channelID string, sessionType string)
 ```
-如果是单聊，同时会推送关闭消息，contentType为1615
+
+如果是单聊，同时会推送关闭消息，contentType 为 1615
 
 ### 更新麦克风状态
 
@@ -230,4 +242,137 @@ func UpdateMichoneStatus(callback open_im_sdk_callback.Base, operationID string,
 
 ```go
 func UpdateSpeakStatus(callback open_im_sdk_callback.Base, operationID string, channelID string)
+```
+
+## 保存群聊
+
+### 功能介绍
+
+:::info 说明
+保存群聊到通讯录
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SaveGroup(callback open_im_sdk_callback.Base, operationID string, groupID string)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述    |
+| -------- | -------- | -------- | ------- |
+| groupID  | string   | 是       | 群聊 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述     |
+| ---- | ---- | -------- |
+| ~    | bool | 保存成功 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.saveGroup(ParamsUtil.buildOperationID(), groupID)
+```
+
+## 取消保存群聊
+
+### 功能介绍
+
+:::info 说明
+取消保存群聊到通讯录
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func UnaveGroup(callback open_im_sdk_callback.Base, operationID string, groupID string)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述    |
+| -------- | -------- | -------- | ------- |
+| groupID  | string   | 是       | 群聊 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述     |
+| ---- | ---- | -------- |
+| ~    | bool | 取消保存成功 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.unsaveGroup(ParamsUtil.buildOperationID(), groupID)
+```
+
+## 获取保存的群聊列表
+
+### 功能介绍
+
+:::info 说明
+获取保存的群聊列表
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func GetGroupSavedListSplit(ctx context.Context, offset, count int) ([]*model_struct.LocalGroup, error)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述             |
+| -------- | -------- | -------- | ---------------- |
+| offset   | int      | 是       | offset 从 0 开始 |
+| count    | int      | 是       | 每次拉取的记录数 |
+
+### 返回结果
+
+| 名称 | 类型                                                   | 描述     |
+| ---- | ------------------------------------------------------ | -------- |
+| ~    | List<[GroupInfo](docs/sdks/class/group/groupInfo.mdx)> | 成功返回 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.getGroupSavedListSplit(ParamsUtil.buildOperationID(), offset, count)
+```
+
+## 是否被拉黑
+
+### 功能介绍
+
+:::info 说明
+判断本人是否被对方拉黑
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func IsBeBlock(ctx context.Context, owner_block_id string) (bool, error)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述        |
+| -------------- | -------- | -------- | ----------- |
+| owner_block_id | string   | 是       | 对方好友 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述           |
+| ---- | ---- | -------------- |
+| ~    | bool | 是否被对方拉黑 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.isBeBlock(ParamsUtil.buildOperationID(), owner_block_id)
 ```
