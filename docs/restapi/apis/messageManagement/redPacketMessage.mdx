@@ -1,0 +1,88 @@
+---
+sidebar_position: 7
+title: 红包消息
+hide_title: true
+---
+
+<center>
+
+## 红包消息
+
+</center>
+
+### 简要描述
+
+- 模拟用户发送一条红包状态变更消息。
+
+### 请求方式
+
+- `post`
+
+### 请求 URL
+
+- `http://x.x.x.x:10002/bs/red_packet_msg`
+
+### Header
+
+| header 名   | 示例值        | 选填 | 类型   | 说明                         |
+| :---------- | :------------ | :--- | ------ | ---------------------------- |
+| operationID | 1646445464564 | 必填 | string | operationID 用于全局链路追踪 |
+| token       | eyJhbxxxx3Xs  | 必填 | string | 管理员 token                 |
+
+### 请求参数示例
+
+```json
+{
+  "userID": "9906953281",
+  "conversationID": "si_2699373280_9906953281",
+  "seq": 2,
+  "redPacketID": "1",
+  "contentType": "2401",
+  "claimUserID": "990691234"
+}
+```
+
+| 字段名         | 选填   | 类型   | 说明                                                  |
+| :------------- | :----- | :----- | ----------------------------------------------------- |
+| userID         | 必填   | string | APP 管理员 ID                                         |
+| conversationID | 必填   | string | 会话 ID                                               |
+| seq            | 必填   | string | 本条消息的 seq                                        |
+| redPacketID    | 必填   | string | 红包 ID                                               |
+| contentType    | 必填   | int32  | 2401 红包已领完/ 2402 红包已过期/ 2403 用户领取了红包 |
+| claimUserID    | 非必填 | string | 领取红包用户 ID                                       |
+
+### 成功返回示例
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
+
+### 成功返回示例的参数说明
+
+| 参数名            | 类型   | 说明                         |
+| :---------------- | :----- | :--------------------------- |
+| errCode           | int    | 错误码,0 表示成功            |
+| errMsg            | string | 错误简要信息,无错误时为空    |
+| errDlt            | errDlt | 错误详细信息,无错误时为空    |
+
+### 失败返回示例
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+### 失败返回示例的参数说明
+
+| 参数名  | 类型   | 说明                          |
+| :------ | :----- | :---------------------------- |
+| errCode | int    | 错误码,具体查看全局错误码文档 |
+| errMsg  | string | 错误简要信息                  |
+| errDlt  | errDlt | 错误详细信息                  |
