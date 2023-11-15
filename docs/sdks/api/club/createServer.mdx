@@ -1,0 +1,89 @@
+---
+sidebar_position: 1
+title: 创建部落
+hide_title: true
+---
+
+<center>
+
+## 创建新部落
+
+</center>
+
+### 简要描述
+- 创建部落
+  - 默认创建部落主、全部成员两个身份组
+  - 默认创建三个分组，默认分组、文字聊天、部落管理
+  - 默认创建四个房间，公告栏、日常聊天、资讯互动、部落事务讨论
+### 请求方式
+- `post` 
+### 请求URL
+- `http://x.x.x.x:10002/club/create_server` 
+
+
+### Header
+|header名|示例值|选填|类型|说明|
+|:----    |:-------    |:--- |---|------      |
+|operationID|1646445464564|必填|string|operationID用于全局链路追踪|
+|token|eyJhbxxxx3Xs|必填|string|管理员token|
+
+
+### 请求参数示例
+
+
+```json
+{
+  "ownerUserID": "payAdmin",
+  "serverName": "test club5",
+  "icon": "Gordon",
+  "description": "description"
+}
+```
+|字段名|选填|类型|说明|
+|:----    |:-------    |:--- |---|
+|ownerUserID|必填|string|部落主ID|
+|serverName|必填|string|部落名称|
+|icon|必填|string|部落logo|
+|description|选填｜string|部落描述｜
+### 成功返回示例
+
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "errDlt": "",
+    "data": {
+        "serverID": "89601197"
+    }
+}
+```
+### 成功返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,0表示成功|
+|errMsg|string|错误简要信息,无错误时为空|
+|errDlt|errDlt|错误详细信息,无错误时为空|
+|data|object|通用数据对象，具体结构见下方|
+|serverID|string|部落ID|
+
+### 失败返回示例
+
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+### 失败返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,具体查看全局错误码文档|
+|errMsg|string|错误简要信息|
+|errDlt|errDlt|错误详细信息|
