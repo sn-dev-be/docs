@@ -49,7 +49,7 @@ sidebar_position: 1
 ### 函数原型
 
 ```go showLineNumbers
-func CreateTransferMessage(operationID string, transferInfo string) string
+func CreateTransferMessage(operationID string, transferElem string) string
 ```
 
 ### 输入参数
@@ -87,18 +87,18 @@ func CreateTransferMessage(operationID string, transferInfo string) string
 ### 函数原型
 
 ```go showLineNumbers
-func CreateRedPacketMessage(operationID string, redPacketInfo string) string
+func CreateRedPacketMessage(operationID string, redPacketElem string) string
 ```
 
 ### 输入参数
 
 [RedPacketElem](docs/sdks/class/message/redPacketElem.mdx)
 
-| 参数名称    | 参数类型 | 是否必填 | 描述                   |
-| ----------- | -------- | -------- | ---------------------- |
-| redPacketID | string   | 是       | 业务方红包 ID          |
-| greetings   | string   | 是       | 祝福文案               |
-| status      | int32    | 是       | 1 正常/ 2 领完/ 3 失效 |
+| 参数名称    | 参数类型 | 是否必填 | 描述                                         |
+| ----------- | -------- | -------- | -------------------------------------------- |
+| redPacketID | string   | 是       | 业务方红包 ID                                |
+| greetings   | string   | 是       | 祝福文案                                     |
+| status      | int32    | 是       | 1 发出/ 2 领完/ 3 失效/ 4 当前用户已领取红包 |
 
 ### 返回结果
 
@@ -114,18 +114,27 @@ func CreateRedPacketMessage(operationID string, redPacketInfo string) string
 
 ### 通知事件
 
-当红包领完(2401)、过期(2402)、被某用户领取(2403)业务端都会推送对应通知，客户端在`OnRecvNewMessage`事件回调中将会收到通知事件消息
+*注意*
+
+当红包消息发送后，需要给业务系统上报当前红包消息的`conversationID`和`seq`字段，具体上报接口见业务系统，seq字段当消息发送成功后，
+通过`AdvancedMsgListener.OnRecvSelfSendRedPacketSeqChanged`事件回调返回
+
+当红包领完(2401)、过期(2402) 会回调 AdvancedMsgListener 的`onRecvRedPacketStatusChanged`方法，同时会修改本地红包消息状态
+
+被某用户领取(2403) 会回调 AdvancedMsgListener `OnRecvNewMessage`方法
 
 红包通知统一返回以下数据结构
 
 [RedPacketInfo](docs/sdks/class/message/redPacketInfo.mdx)
 
-| 名称        | 类型                                              | 描述                   |
-| ----------- | ------------------------------------------------- | ---------------------- |
-| clientMsgID | string                                            | 消息 ID                |
-| redPacketID | string                                            | 红包 ID                |
-| claimUser   | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 领取用户               |
-| status      | int32                                             | 1 正常/ 2 领完/ 3 失效 |
+| 名称           | 类型                                              | 描述     |
+| -------------- | ------------------------------------------------- | -------- |
+| clientMsgID    | string                                            | 消息 ID  |
+| seq            | int64                                             | 消息 seq |
+| conversationID | string                                            | 会话 ID  |
+| contentType    | int32                                             | 消息类型 |
+| redPacketID    | string                                            | 红包 ID  |
+| claimUser      | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 领取用户 |
 
 ## 语音通话
 
@@ -302,8 +311,8 @@ func UnsaveGroup(callback open_im_sdk_callback.Base, operationID string, groupID
 
 ### 返回结果
 
-| 名称 | 类型 | 描述     |
-| ---- | ---- | -------- |
+| 名称 | 类型 | 描述         |
+| ---- | ---- | ------------ |
 | ~    | bool | 取消保存成功 |
 
 ### 代码示例
