@@ -1,21 +1,21 @@
 ---
 sidebar_position: 2
-title: 获取部落详情
+title: 解散部落
 hide_title: true
 ---
 
 <center>
 
-## 获取部落详情
+## 解散部落
 
 </center>
 
 ### 简要描述
-- 根据给定serverID获取部落详情
+- 只有部落主有权限删除部落
 ### 请求方式
 - `post` 
 ### 请求URL
-- `http://x.x.x.x:10002/club/get_server_info` 
+- `http://x.x.x.x:10002/club/dismiss_server` 
 
 
 ### Header
@@ -44,58 +44,7 @@ hide_title: true
     "errCode": 0,
     "errMsg": "",
     "errDlt": "",
-    "data": {
-        "server": {
-            "serverID": "2054384799",
-            "serverName": "2023-11-15",
-            "icon": "Gordon",
-            "description": "description",
-            "ownerUserID": "payAdmin",
-            "memberNumber": 1,
-            "status": 1,
-            "categoryNumber": 3,
-            "channelNumber": 4,
-            "createTime": 1700014726950,
-            "dappID": "123456"
-        },
-        "categoryList": [
-            {
-                "categoryID": "2504621009",
-                "categoryType": 1,
-                "groupList": [
-                    {
-                        "groupID": "2958282471",
-                        "groupName": "2023-11-15",
-                        "faceURL": "2023-11-15",
-                        "groupType": 3,
-                        "conversationID": "svg_2958282471",
-                        "conversationType": 5,
-                        "GroupCategoryID": "2504621009",
-                        "ServerID": "2054384799",
-                        "groupMode": 1
-                    },
-                    {
-                        "groupID": "830270886",
-                        "groupName": "2023-11-15",
-                        "faceURL": "2023-11-15",
-                        "groupType": 3,
-                        "conversationID": "svg_830270886",
-                        "conversationType": 5,
-                        "GroupCategoryID": "2504621009",
-                        "ServerID": "2054384799",
-                        "groupMode": 2,
-                        "dapp": {
-                            "id": 1,
-                            "groupID": "830270886",
-                            "dappID": "dappID",
-                            "createTime": 1699948247654
-                        }
-                    }
-                ]
-            }
-        ],
-        "joined": true
-    }
+    "data": {}
 }
 ```
 ### 成功返回示例的参数说明
