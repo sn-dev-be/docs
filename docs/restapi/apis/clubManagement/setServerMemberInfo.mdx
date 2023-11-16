@@ -1,21 +1,20 @@
 ---
-sidebar_position: 2
-title: 编辑部落
+sidebar_position: 1
+title: 编辑部落成员信息
 hide_title: true
 ---
 
 <center>
 
-## 编辑部落
+## 编辑部落成员信息
 
 </center>
 
 ### 简要描述
-- 编辑部落，需要修改哪一项，body中就传哪一项
-### 请求方式
+- 编辑部落成员信息
 - `post` 
 ### 请求URL
-- `http://x.x.x.x:10002/club/set_servers_info` 
+- `http://x.x.x.x:10002/club/set_server_member_info` 
 
 
 ### Header
@@ -30,33 +29,28 @@ hide_title: true
 
 ```json
 {
-    "serverInfoForSet":{
-        "serverID": "2054384799",
-        "serverName": "2023-11-15",
-        "icon": "Gordon",
-        "description": "description",
-        "banner": "banner",
-        "applyMode": 1,
-        "searchable": 1,
-        "userMutualAccessible": 1,
-        "dappID": "123456",
-        "ex":"ex"
+  "members": [
+    {
+        "serverID":"",
+        "userID":"",
+        "nickname":"",
+        "faceURL":"",
+        "roleLevel":,
+        "ex":""
     }
+  ]
 }
 
 ```
 |字段名|选填|类型|说明|
 |:----    |:-------    |:--- |---|
 |serverID|必填|string|部落ID|
-|serverName|选填|string|部落名称|
-|icon|选填|string|部落头像|
-|description|选填|string|部落介绍|
-|banner|选填|string|部落banner|
-|applyMode|选填|number|申请模式 0-审核 1-不审核|
-|searchable|选填|number|是否可搜索 0-否 1-是|
-|userMutualAccessible|选填|number|成员相互访问 0-否 1-是|
-|ex|选填|string|部落ID|
-
+|members|必填|Array|用户集合|
+|serverID|string|部落ID|
+|userID|string|用户ID|
+|nickname|string|昵称|
+|faceURL|string|头像|
+|roleLevel|number|角色等级|
 ### 成功返回示例
 
 
@@ -77,8 +71,6 @@ hide_title: true
 |errMsg|string|错误简要信息,无错误时为空|
 |errDlt|errDlt|错误详细信息,无错误时为空|
 |data|object|通用数据对象，具体结构见下方|
-
-
 
 ### 失败返回示例
 

@@ -1,0 +1,108 @@
+---
+sidebar_position: 1
+title: 获取部落指定部落成员
+hide_title: true
+---
+
+<center>
+
+## 获取部落指定部落成员
+
+</center>
+
+### 简要描述
+- 获取群成员列表
+- `post` 
+### 请求URL
+- `http://x.x.x.x:10002/club/get_server_member_info` 
+
+
+### Header
+|header名|示例值|选填|类型|说明|
+|:----    |:-------    |:--- |---|------      |
+|operationID|1646445464564|必填|string|operationID用于全局链路追踪|
+|token|eyJhbxxxx3Xs|必填|string|管理员token|
+
+
+### 请求参数示例
+
+
+```json
+{
+  "serverID": "499038287",
+  "userIDs":["awe","wewe"]
+}
+
+```
+|字段名|选填|类型|说明|
+|:----    |:-------    |:--- |---|
+|serverID|必填|string|部落ID|
+|userIDs|必填|Array|用户ID集合|
+
+### 成功返回示例
+
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "errDlt": "",
+    "data": {
+        "total": 2,
+        "members": [
+            {
+                "serverID": "499038287",
+                "userID": "6535cf2d2558948bad220ce5",
+                "roleLevel": 100,
+                "joinTime": 1700103910020,
+                "nickname": "Didi123",
+                "faceURL": "https://avatars.githubusercontent.com/u/28507035?s=200&v=4",
+                "inviterUserID": "6535cf2d2558948bad220ce5"
+            },
+            {
+                "serverID": "499038287",
+                "userID": "653b71f94e168c74519dc92a",
+                "joinTime": 1700105172520,
+                "nickname": "cc00013",
+                "faceURL": "https://d2defihkjykaxy.cloudfront.net/public/1698394633692653b71f94e168c74519dc92a.jpg",
+                "muteEndTime": 86400000
+            }
+        ]
+    }
+}
+```
+### 成功返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,0表示成功|
+|errMsg|string|错误简要信息,无错误时为空|
+|errDlt|errDlt|错误详细信息,无错误时为空|
+|data|object|通用数据对象，具体结构见下方|
+|total|number|总记录数|
+|members|Array|部落成员列表|
+|serverID|string|部落ID|
+|userID|string|用户ID|
+|nickname|string|昵称|
+|faceURL|string|头像|
+|muteEndTime|number|禁言时间|
+
+### 失败返回示例
+
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+### 失败返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,具体查看全局错误码文档|
+|errMsg|string|错误简要信息|
+|errDlt|errDlt|错误详细信息|
