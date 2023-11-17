@@ -1,0 +1,188 @@
+---
+sidebar_position: 1
+toc_min_heading_level: 2
+toc_max_heading_level: 2
+---
+
+# setClubListener
+
+## 功能介绍
+
+:::info 说明
+
+设置部落事件监听器，对于部落变化的相关事件，进行异步回调通知，以便 UI 能及时感知并处理。
+
+:::
+
+:::caution 注意
+
+（1）在 initSDK 之后立刻调用；  
+（2）只能调用一次。
+
+:::
+
+<Tabs
+groupId="sdks-language"
+values={[
+{ label: 'iOS', value: 'iOS', },
+{ label: 'Android', value: 'Android', },
+{ label: 'Flutter', value: 'Flutter', },
+{ label: 'uni-app', value: 'uni-app', },
+{ label: 'Web', value: 'Web', },
+]
+}>
+
+<TabItem value="Flutter">
+
+### 函数原型
+
+```dart showLineNumbers
+ Future setClubListener(OnClubListener listener)
+```
+
+### 返回结果
+
+| 参数名称 | 参数类型                                                | 描述 |
+| -------- | ------------------------------------------------------- | ---- | --- |
+| listener | [OnClubListener](docs/sdks/listener/groupListener.mdx) | 是   |     |
+
+### 代码示例
+
+```dart showLineNumbers
+  OpenIM.iMManager.groupManager.setClubListener(OnClubListener(
+      onClubApplicationAccepted: (ClubApplicationInfo info){},
+      onClubApplicationAdded: (ClubApplicationInfo info){},
+      onClubApplicationDeleted: (ClubApplicationInfo info){},
+      onClubApplicationRejected: (ClubApplicationInfo info){},
+      onClubInfoChanged: (ClubInfo info){},
+      onClubMemberAdded: (ClubMembersInfo info){},
+      onClubMemberDeleted: (ClubMembersInfo info){},
+      onClubMemberInfoChanged: (ClubMembersInfo info){},
+      onJoinedClubAdded: (ClubInfo info){},
+      onJoinedClubDeleted: (ClubInfo info){},
+    ));
+```
+
+</TabItem>
+
+<TabItem value="iOS">
+
+### 函数原型
+
+```swift
+
+- (void)addClubListener:(id<OIMClubListener>)listener NS_SWIFT_NAME(addClubListener(listener:));
+
+```
+
+### 返回结果
+
+| 参数名称 | 参数类型                                                     | 描述 |
+| -------- | ------------------------------------------------------------ | ---- | --- |
+| listener | id < [ClubListener](docs/sdks/listener/groupListener.mdx) > | 是   |     |
+
+### 代码示例
+
+```swift showLineNumbers
+
+[OIMManager.callbacker addClubListener:self];
+
+```
+
+</TabItem>
+
+<TabItem value="Android">
+
+### 函数原型
+
+```java showLineNumbers
+    public void setOnClubListener(OnClubListener listener)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型                                                | 是否必填 | 描述     |
+| -------- | ------------------------------------------------------- | -------- | -------- |
+| listener | [OnClubListener](docs/sdks/listener/groupListener.mdx) | 是       | 回调接口 |
+
+### 返回结果
+
+### 代码示例
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.setOnClubListener(new OnClubListener() {
+            @Override
+            public void onClubApplicationAccepted(ClubApplicationInfo info) {
+
+            }
+
+            @Override
+            public void onClubApplicationAdded(ClubApplicationInfo info) {
+
+            }
+
+            @Override
+            public void onClubApplicationDeleted(ClubApplicationInfo info) {
+
+            }
+
+            @Override
+            public void onClubApplicationRejected(ClubApplicationInfo info) {
+
+            }
+
+            @Override
+            public void onClubInfoChanged(ClubInfo info) {
+
+            }
+
+            @Override
+            public void onClubMemberAdded(ClubMembersInfo info) {
+
+            }
+
+            @Override
+            public void onClubMemberDeleted(ClubMembersInfo info) {
+
+            }
+
+            @Override
+            public void onClubMemberInfoChanged(ClubMembersInfo info) {
+
+            }
+
+            @Override
+            public void onJoinedClubAdded(ClubInfo info) {
+
+            }
+
+            @Override
+            public void onJoinedClubDeleted(ClubInfo info) {
+
+            }
+        });
+```
+
+</TabItem>
+
+<TabItem value="Web">
+
+:::caution 注意
+
+登录成功后自动设置，可以直接在客户端使用监听，[部落事件详情参见](docs/sdks/listener/groupListener.mdx)
+
+:::
+
+</TabItem>
+
+<TabItem value="uni-app">
+
+:::caution 注意
+
+初始化成功后自动设置 回调会通过`globalEvent`传递到客户端，[部落事件详情参见](docs/sdks/listener/groupListener.mdx)
+
+:::
+
+</TabItem>
+
+</Tabs>
