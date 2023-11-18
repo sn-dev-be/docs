@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
-title: 创建房间
+title: 编辑房间排序
 hide_title: true
 ---
 
 <center>
 
-## 创建房间
+## 编辑房间排序
 
 </center>
 
 ### 简要描述
-- 创建房间
+- 编辑房间排序， 可以移动房间在本组内的排序和移动到其他分组中，可以同时修改groupName
 - `post` 
 ### 请求URL
-- `http://x.x.x.x:10002/club/create_server_group` 
+- `http://x.x.x.x:10002/club/set_server_group_order` 
 
 
 ### Header
@@ -28,37 +28,39 @@ hide_title: true
 
 
 ```json
-{
-  "groupInfo":{
-    "groupName": "2023-11-15",
-    "faceURL": "2023-11-15",
-    "introduction": "introduction",
-    "ownerUserID": "payAdmin",
-    "groupType":3,
-    "groupMode": 2,
-    "conditionType": 0,
-    "condition": "0",
-    "groupCategoryID":"2149539263",
-    "serverID":"2054384799"
-  },
-  "dappID": "dappID"
+ {
+  "serverID": "1785704729",
+  "categoryList":[
+    {        
+      "categoryInfo":{
+            "categoryID": "3630659462"
+        },
+        "groupList": [
+            {
+               "groupID": "3814665804",
+               "groupName": "日常聊天"
+            },
+             {
+               "groupID": "2986111846",
+               "groupName": "部落事务讨论"
+            }
+        ]
+
+    }
+  ]
 }
+
 
 ```
 |字段名|选填|类型|说明|
 |:----    |:-------    |:--- |---|
-|groupInfo|必填|Object|房间基本信息|
-|faceURL|必填|string|房间logo|
-|introduction|选填|string|房间介绍|
-|ownerUserID|必填|string|房主ID|
-|groupName|必填||string|房间名称|
-|groupType|number|房间类型 部落房间类型为3|
-|groupCategoryID|string|分组ID|
 |serverID|string|部落ID|
-|groupMode|number|房间类型 1-聊天房间 2-应用房间|
-|dappID|选填|string|dappID|
-|conditionType|number|token 类型 0-无要求 1-ETMP|
-|condition|string|token数量，默认为0|
+|categoryList|Array||
+|categoryInfo|Object|分组信息|
+|categoryID|string|分组ID|
+|groupList|Array|房间列表|
+|groupID|string|房间ID|
+|groupName|string|房间名称|
 
 ### 成功返回示例
 
@@ -68,21 +70,7 @@ hide_title: true
     "errCode": 0,
     "errMsg": "",
     "errDlt": "",
-    "data": {
-      "groupInfo":{
-        "groupID": "groupID",
-        "groupName": "2023-11-15",
-        "faceURL": "2023-11-15",
-        "introduction": "introduction",
-        "ownerUserID": "payAdmin",
-        "groupType":3,
-        "groupMode": 2,
-        "conditionType": 0,
-        "condition": 0,
-        "groupCategoryID":"2149539263",
-        "serverID":"2054384799"
-      }
-    }
+    "data": {}
 }
 ```
 ### 成功返回示例的参数说明
