@@ -4,7 +4,7 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
-# ServerApplicationInfo
+# ClubApplicationInfo
 
 ## 功能介绍
 
@@ -27,21 +27,20 @@ values={[
 
 <TabItem value="Flutter">
 
-### ServerApplicationInfo
+### ClubApplicationInfo
 
 | 字段名称      | 字段类型                               | 描述                                             |
 | ------------- | -------------------------------------- | ------------------------------------------------ |
 | serverID      | String                                 | 部落 ID                                          |
 | serverName    | String                                 | 部落名称                                         |
-| notification  | String                                 | 部落公告                                         |
-| introduction  | String                                 | 部落简介                                         |
-| serverFaceURL | String                                 | 部落头像                                         |
+| banner        | String                                 | 部落封面图                                       |
+| description   | String                                 | 部落简介                                         |
+| icon          | String                                 | 部落头像                                         |
 | createTime    | int                                    | 申请进部落时间                                   |
 | status        | int                                    | 部落状态：0 正常，1 被封，2 解散，3 禁言         |
 | creatorUserID | String                                 | 建部落者 ID                                      |
-| serverType    | [int](docs/sdks/enum/serverType.mdx)   | 部落类型                                         |
 | ownerUserID   | String                                 | 部落主 ID                                        |
-| memberCount   | int                                    | 部落成员数量                                     |
+| memberNum     | int                                    | 部落成员数量                                     |
 | userID        | String                                 | 进部落申请者 ID                                  |
 | nickname      | String                                 | 进部落申请者昵称                                 |
 | userFaceURL   | String                                 | 进部落申请者头像                                 |
@@ -59,21 +58,20 @@ values={[
 
 <TabItem value="iOS">
 
-### OIMServerApplicationInfo
+### OIMClubApplicationInfo
 
 | 字段名称      | 字段类型                                                | 描述                 |
 | ------------- | ------------------------------------------------------- | -------------------- |
 | serverID      | NSString                                                | 部落 ID              |
 | serverName    | NSString                                                | 部落名称             |
-| notification  | NSString                                                | 部落公告             |
-| introduction  | NSString                                                | 部落简介             |
-| serverFaceURL | NSString                                                | 部落头像             |
+| banner        | NSString                                                | 部落封面图           |
+| description   | NSString                                                | 部落简介             |
+| icon          | NSString                                                | 部落头像             |
 | createTime    | NSInteger                                               | 申请进部落时间       |
 | status        | [ServerStatus](docs/sdks/enum/serverStatus.mdx)         | 部落状态             |
 | creatorUserID | NSString                                                | 建部落者 ID          |
-| serverType    | [ServerType](docs/sdks/enum/serverType.mdx)             | 部落类型             |
 | ownerUserID   | NSString                                                | 部落主 ID            |
-| memberCount   | NSInteger                                               | 部落成员数量         |
+| memberNum     | NSInteger                                               | 部落成员数量         |
 | userID        | NSString                                                | 进部落申请者 ID      |
 | nickname      | NSString                                                | 进部落申请者昵称     |
 | userFaceURL   | NSString                                                | 进部落申请者头像     |
@@ -91,21 +89,20 @@ values={[
 
 <TabItem value="Android">
 
-### ServerApplicationInfo
+### ClubApplicationInfo
 
 | 字段名称      | 字段类型 | 描述                                                          |
 | ------------- | -------- | ------------------------------------------------------------- |
 | serverID      | String   | 部落 ID                                                       |
 | serverName    | String   | 部落名称                                                      |
-| notification  | String   | 部落公告                                                      |
-| introduction  | String   | 部落简介                                                      |
-| serverFaceURL | String   | 部落头像                                                      |
+| banner        | String   | 部落封面图                                                    |
+| description   | String   | 部落简介                                                      |
+| icon          | String   | 部落头像                                                      |
 | createTime    | int      | 申请进部落时间                                                |
 | status        | int      | [ServerStatus](docs/sdks/enum/serverStatus.mdx) 部落状态      |
 | creatorUserID | String   | 建部落者 ID                                                   |
-| serverType    | int      | [ServerType](docs/sdks/enum/serverType.mdx) 部落类型          |
 | ownerUserID   | String   | 部落主 ID                                                     |
-| memberCount   | int      | 部落成员数量                                                  |
+| memberNum     | int      | 部落成员数量                                                  |
 | userID        | String   | 进部落申请者 ID                                               |
 | nickname      | String   | 进部落申请者昵称                                              |
 | userFaceURL   | String   | 进部落申请者头像                                              |
@@ -129,15 +126,14 @@ values={[
 | ------------- | ---------------------------------------------------------- | -------------------- |
 | serverID      | string                                                     | 部落 ID              |
 | serverName    | string                                                     | 部落名称             |
-| notification  | string                                                     | 部落公告             |
-| introduction  | string                                                     | 部落简介             |
-| serverFaceURL | string                                                     | 部落头像             |
+| banner        | string                                                     | 部落封面图           |
+| description   | string                                                     | 部落简介             |
+| icon          | string                                                     | 部落头像             |
 | createTime    | number                                                     | 申请进部落时间       |
 | status        | [ServerStatus](docs/sdks/enum/serverStatus.mdx)            | 部落状态             |
 | creatorUserID | string                                                     | 建部落者 ID          |
-| serverType    | [ServerType](docs/sdks/enum/serverType.mdx)                | 部落类型             |
 | ownerUserID   | string                                                     | 部落主 ID            |
-| memberCount   | number                                                     | 部落成员数量         |
+| memberNum     | number                                                     | 部落成员数量         |
 | userID        | string                                                     | 进部落申请者 ID      |
 | nickname      | string                                                     | 进部落申请者昵称     |
 | userFaceURL   | string                                                     | 进部落申请者头像     |
@@ -161,15 +157,14 @@ values={[
 | ------------- | ---------------------------------------------------------- | -------------------- |
 | serverID      | string                                                     | 部落 ID              |
 | serverName    | string                                                     | 部落名称             |
-| notification  | string                                                     | 部落公告             |
-| introduction  | string                                                     | 部落简介             |
-| serverFaceURL | string                                                     | 部落头像             |
+| banner        | string                                                     | 部落封面图           |
+| description   | string                                                     | 部落简介             |
+| icon          | string                                                     | 部落头像             |
 | createTime    | number                                                     | 申请进部落时间       |
 | status        | [ServerStatus](docs/sdks/enum/serverStatus.mdx)            | 部落状态             |
 | creatorUserID | string                                                     | 建部落者 ID          |
-| serverType    | [ServerType](docs/sdks/enum/serverType.mdx)                | 部落类型             |
 | ownerUserID   | string                                                     | 部落主 ID            |
-| memberCount   | number                                                     | 部落成员数量         |
+| memberNum     | number                                                     | 部落成员数量         |
 | userID        | string                                                     | 进部落申请者 ID      |
 | nickname      | string                                                     | 进部落申请者昵称     |
 | userFaceURL   | string                                                     | 进部落申请者头像     |
