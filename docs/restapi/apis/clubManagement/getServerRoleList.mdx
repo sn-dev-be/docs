@@ -14,7 +14,7 @@ hide_title: true
 - 获取群成员列表
 - `post` 
 ### 请求URL
-- `http://x.x.x.x:10002/club/get_server_members_info` 
+- `http://x.x.x.x:10002/club/get_server_role_info` 
 
 
 ### Header
@@ -29,8 +29,11 @@ hide_title: true
 
 ```json
 {
-  "serverID": "499038287",
-  "userIDs":["awe","wewe"]
+  "pagination": {
+    "showNumber": 1,
+    "pageNumber": 10
+  },
+  "serverID":""
 }
 
 ```
@@ -49,23 +52,17 @@ hide_title: true
     "errDlt": "",
     "data": {
         "total": 2,
-        "members": [
+         "roles": [
             {
                 "serverID": "499038287",
-                "userID": "6535cf2d2558948bad220ce5",
-                "roleLevel": 100,
-                "joinTime": 1700103910020,
-                "nickname": "Didi123",
-                "faceURL": "https://avatars.githubusercontent.com/u/28507035?s=200&v=4",
-                "inviterUserID": "6535cf2d2558948bad220ce5"
-            },
-            {
-                "serverID": "499038287",
-                "userID": "653b71f94e168c74519dc92a",
-                "joinTime": 1700105172520,
-                "nickname": "cc00013",
-                "faceURL": "https://d2defihkjykaxy.cloudfront.net/public/1698394633692653b71f94e168c74519dc92a.jpg",
-                "muteEndTime": 86400000
+                "roleID": "6535cf2d2558948bad220ce5",
+                "roleName": "Didi123",
+                "colorLevel": 100,
+                "ex":"",
+                "createTime": 1700103910020,
+                "priority": 0,
+                "icon": "https://avatars.githubusercontent.com/u/28507035?s=200&v=4",
+                "permissions": "{\"sendMsg\":true,\"PostTweet\":true,\"manageMsg\":true,\"TweetReply\":true,\"manageRole\":true,\"shareServer\":true,\"manageMember\":true,\"manageServer\":true,\"manageChannel\":true,\"manageCommunity\":true,\"ManageGroupCategory\":true}"
             }
         ]
     }
@@ -81,12 +78,16 @@ hide_title: true
 |errDlt|errDlt|错误详细信息,无错误时为空|
 |data|object|通用数据对象，具体结构见下方|
 |total|number|总记录数|
-|members|Array|部落成员列表|
+|roles|Array|部落角色列表|
 |serverID|string|部落ID|
-|userID|string|用户ID|
-|nickname|string|昵称|
-|faceURL|string|头像|
-|muteEndTime|number|禁言时间|
+|roleID|string|角色ID|
+|roleName|string|角色名|
+|colorLevel|number|颜色等级|
+|ex|string|备注|
+|createTime|int64|创建时间|
+|priority|number|优先级|
+|icon|string|角色头像|
+|permissions|string|角色权限|
 
 ### 失败返回示例
 

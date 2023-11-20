@@ -1,0 +1,129 @@
+---
+sidebar_position: 1
+title: 获取部落指定房间信息
+hide_title: true
+---
+
+<center>
+
+## 获取部落指定房间信息
+
+</center>
+
+### 简要描述
+- 获取部落指定房间信息
+- `post` 
+### 请求URL
+- `http://x.x.x.x:10002/club/get_server_groups_info` 
+
+
+### Header
+|header名|示例值|选填|类型|说明|
+|:----    |:-------    |:--- |---|------      |
+|operationID|1646445464564|必填|string|operationID用于全局链路追踪|
+|token|eyJhbxxxx3Xs|必填|string|管理员token|
+
+
+### 请求参数示例
+
+
+```json
+{
+     "groupIDs":["", ""]
+}
+
+
+```
+|字段名|选填|类型|说明|
+|:----    |:-------    |:--- |---|
+|groupInfo|必填|Object|房间基本信息|
+|faceURL|必填|string|房间logo|
+|introduction|选填|string|房间介绍|
+|ownerUserID|必填|string|房主ID|
+|groupName|必填||string|房间名称|
+|groupType|number|房间类型 部落房间类型为3|
+|groupCategoryID|string|分组ID|
+|serverID|string|部落ID|
+|groupMode|number|房间类型 1-聊天房间 2-应用房间|
+|conditionType|number|token 类型 0-无要求 1-ETMP|
+|condition|string|token数量，默认为0|
+|dappID|选填|string|dappID|
+
+### 成功返回示例
+
+
+```json
+{
+    "errCode": 0,
+    "errMsg": "",
+    "errDlt": "",
+    "data": {
+        "groupInfos":[
+            {
+                "groupID": "1306496076",
+                "groupName": "abc",
+                "notification": "abc",
+                "introduction": "acb",
+                "faceURL": "abc",
+                "ownerUserID": "65386e3a57fdf1e72485393f",
+                "createTime": 1700223341417,
+                "creatorUserID": "65386e3a57fdf1e72485393f",
+                "groupType": 3,
+                "notificationUpdateTime": 1700277494834,
+                "notificationUserID": "65386e3a57fdf1e72485393f",
+                "conditionType": 2,
+                "condition": "0.01",
+                "groupCategoryID": "1899831688",
+                "serverID": "1515471845",
+                "dapp": {
+                    "id": 1,
+                    "groupID": "830270886",
+                    "dappID": "dappID",
+                    "createTime": 1699948247654
+                }
+            }
+        ]
+    }
+}
+```
+### 成功返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,0表示成功|
+|errMsg|string|错误简要信息,无错误时为空|
+|errDlt|errDlt|错误详细信息,无错误时为空|
+|data|object|通用数据对象，具体结构见下方|
+|groupInfos|Array|房间列表|
+|groupID|string|房间ID|
+|groupName|string|房间名称|
+|groupType|number|房间类型 - IM用|
+|conversationID|string|会话ID|
+|conversationType|number|会话类型|
+|conditionType|number|token类型 1- ETMP|
+|condition|string|token数量|
+|groupCategoryID|string|分组ID|
+|serverID|string|部落ID|
+|groupMode|number|房间类型 1-聊天房间 2-应用房间|
+|dapp|object|应用数据|
+|dappID|string|dappID|
+
+### 失败返回示例
+
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+### 失败返回示例的参数说明
+
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码,具体查看全局错误码文档|
+|errMsg|string|错误简要信息|
+|errDlt|errDlt|错误详细信息|
