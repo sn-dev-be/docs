@@ -35,6 +35,9 @@ sidebar_position: 1
 | 2007   | 提现失败通知         |
 | 2008   | 红包超时通知         |
 | 2009   | 收到转账通知         |
+| 1803   | 加入部落通知         |
+| 1805   | 加入部落接受通知     |
+| 1806   | 加入部落拒绝通知     |
 
 ## 转账
 
@@ -114,9 +117,9 @@ func CreateRedPacketMessage(operationID string, redPacketElem string) string
 
 ### 通知事件
 
-*注意*
+_注意_
 
-当红包消息发送后，需要给业务系统上报当前红包消息的`conversationID`和`seq`字段，具体上报接口见业务系统，seq字段当消息发送成功后，
+当红包消息发送后，需要给业务系统上报当前红包消息的`conversationID`和`seq`字段，具体上报接口见业务系统，seq 字段当消息发送成功后，
 通过`AdvancedMsgListener.OnRecvSelfSendRedPacketSeqChanged`事件回调返回
 
 当红包领完(2401)、过期(2402) 会回调 AdvancedMsgListener 的`onRecvRedPacketStatusChanged`方法，同时会修改本地红包消息状态
@@ -387,3 +390,43 @@ func IsBeBlock(ctx context.Context, owner_block_id string) (bool, error)
 ```go showLineNumbers
  Open_im_sdk.isBeBlock(ParamsUtil.buildOperationID(), owner_block_id)
 ```
+
+## 部落通知
+
+### 功能介绍
+
+:::info 说明
+当加入需审核的部落时，拥有管理部落成员权限的用户将会收到消息，消息发送人 id 为 clubAdmin
+:::
+
+### 加入部落通知
+
+用户申请加入部落，将会收到 contentType 为 1803 的消息，消息负载数据结构如下
+
+| 名称      | 类型                                              | 描述       |
+| --------- | ------------------------------------------------- | ---------- |
+| server    | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息   |
+| applicant | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息 |
+| reqMsg    | string                                            | 申请备注   |
+
+### 加入部落接受通知
+
+管理员通过申请，部落内所有管理员都会收到 contentType 为 1805 的消息，消息负载数据结构如下
+
+| 名称       | 类型                                              | 描述                 |
+| ---------- | ------------------------------------------------- | -------------------- |
+| server     | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息             |
+| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息           |
+| handleMsg  | string                                            | 处理信息             |
+| receiverAs | int32                                             | 1 admin/ 0 applicant |
+
+### 加入部落拒绝通知
+
+管理员拒绝申请，部落内所有管理员都会收到 contentType 为 1806 的消息，消息负载数据结构如下
+
+| 名称       | 类型                                              | 描述                 |
+| ---------- | ------------------------------------------------- | -------------------- |
+| server     | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息             |
+| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息           |
+| handleMsg  | string                                            | 处理信息             |
+| receiverAs | int32                                             | 1 admin/ 0 applicant |
