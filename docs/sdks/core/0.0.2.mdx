@@ -396,37 +396,42 @@ func IsBeBlock(ctx context.Context, owner_block_id string) (bool, error)
 ### 功能介绍
 
 :::info 说明
-当加入需审核的部落时，拥有管理部落成员权限的用户将会收到消息，消息发送人 id 为 clubAdmin
+部落审核消息，所有消息发送人 id 为 clubAdmin
 :::
 
 ### 加入部落通知
 
-用户申请加入部落，将会收到 contentType 为 1803 的消息，消息负载数据结构如下
+用户申请加入部落，拥有管理部落成员权限的用户将会收到 contentType 为 1803 的消息，消息负载数据结构如下
 
-| 名称      | 类型                                              | 描述       |
-| --------- | ------------------------------------------------- | ---------- |
-| server    | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息   |
-| applicant | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息 |
-| reqMsg    | string                                            | 申请备注   |
+当管理员通过、拒绝申请之后，将会更改本地消息记录，将handleResult该为相应状态值
+
+当某个管理员通过申请后，其他管理员再次点击通过申请，将会收到错误码为1206的错误提示
+
+| 名称         | 类型                                              | 描述       |
+| ------------ | ------------------------------------------------- | ---------- |
+| server       | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息   |
+| applicant    | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息 |
+| reqMsg       | string                                            | 申请备注   |
+| handleResult | [int](docs/sdks/enum/handleResult.mdx)            | 处理结果   |
 
 ### 加入部落接受通知
 
-管理员通过申请，部落内所有管理员都会收到 contentType 为 1805 的消息，消息负载数据结构如下
+管理员通过申请，申请人会收到 contentType 为 1805 的消息，消息负载数据结构如下
 
 | 名称       | 类型                                              | 描述                 |
 | ---------- | ------------------------------------------------- | -------------------- |
 | server     | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息             |
-| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息           |
+| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 处理人信息           |
 | handleMsg  | string                                            | 处理信息             |
 | receiverAs | int32                                             | 1 admin/ 0 applicant |
 
 ### 加入部落拒绝通知
 
-管理员拒绝申请，部落内所有管理员都会收到 contentType 为 1806 的消息，消息负载数据结构如下
+管理员拒绝申请，申请人会收到 contentType 为 1806 的消息，消息负载数据结构如下
 
 | 名称       | 类型                                              | 描述                 |
 | ---------- | ------------------------------------------------- | -------------------- |
 | server     | [ServerInfo](docs/sdks/class/club/serverInfo.mdx) | 部落信息             |
-| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 申请人信息           |
+| opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 处理人信息           |
 | handleMsg  | string                                            | 处理信息             |
 | receiverAs | int32                                             | 1 admin/ 0 applicant |
