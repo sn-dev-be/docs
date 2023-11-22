@@ -11,115 +11,113 @@ hide_title: true
 </center>
 
 ### 简要描述
-- 修改房间
-- `post` 
-### 请求URL
-- `http://x.x.x.x:10002/club/set_server_group_info` 
 
+- 修改房间
+- `post`
+
+### 请求 URL
+
+- `http://x.x.x.x:10002/club/set_server_group_info`
 
 ### Header
-|header名|示例值|选填|类型|说明|
-|:----    |:-------    |:--- |---|------      |
-|operationID|1646445464564|必填|string|operationID用于全局链路追踪|
-|token|eyJhbxxxx3Xs|必填|string|管理员token|
 
+| header 名   | 示例值        | 选填 | 类型   | 说明                         |
+| :---------- | :------------ | :--- | ------ | ---------------------------- |
+| operationID | 1646445464564 | 必填 | string | operationID 用于全局链路追踪 |
+| token       | eyJhbxxxx3Xs  | 必填 | string | 管理员 token                 |
 
 ### 请求参数示例
 
-
 ```json
- {
-     "groupInfo":{
-        "groupID": "1306496076",
-        "groupName": "abc",
-        "notification":"abc",
-        "introduction":"acb",
-        "faceURL":"abc",
-        "condition":"0.01",
-        "conditionType": 2,
-        "groupCategoryID": "1899831688",
-        "serverID": "1515471845",
-        "groupMode": 2
-     },
-     "dappID":"ab"
+{
+  "groupInfo": {
+    "groupID": "1306496076",
+    "groupName": "abc",
+    "notification": "abc",
+    "introduction": "acb",
+    "faceURL": "abc",
+    "condition": "0.01",
+    "conditionType": 2,
+    "groupCategoryID": "1899831688",
+    "serverID": "1515471845",
+    "groupMode": 2
+  },
+  "dappID": "ab"
 }
-
-
 ```
-|字段名|选填|类型|说明|
-|:----    |:-------    |:--- |---|
-|groupInfo|必填|Object|房间基本信息|
-|faceURL|必填|string|房间logo|
-|introduction|选填|string|房间介绍|
-|ownerUserID|必填|string|房主ID|
-|groupName|必填||string|房间名称|
-|groupType|number|房间类型 部落房间类型为3|
-|groupCategoryID|string|分组ID|
-|serverID|string|部落ID|
-|groupMode|number|房间类型 1-聊天房间 2-应用房间|
-|conditionType|number|token 类型 0-无要求 1-ETMP|
-|condition|string|token数量，默认为0|
-|dappID|选填|string|dappID|
+
+| 字段名          | 选填 | 类型   | 说明                           |
+| :-------------- | :--- | :----- | ------------------------------ |
+| groupInfo       | 必填 | Object | 房间基本信息                   |
+| groupID         | 必填 | string | 房间 ID                        |
+| serverID        | 必填 | string | 部落 ID                        |
+| faceURL         | 选填 | string | 房间 logo                      |
+| introduction    | 选填 | string | 房间介绍                       |
+| groupName       | 选填 | string | 房间名称                       |
+| groupType       | 选填 | number | 房间类型 部落房间类型为 3      |
+| groupCategoryID | 选填 | string | 分组 ID                        |
+| groupMode       | 选填 | number | 房间类型 1-聊天房间 2-应用房间 |
+| conditionType   | 选填 | number | token 类型 0-无要求 1-ETMP     |
+| condition       | 选填 | string | token 数量，默认为 0           |
+| dappID          | 选填 | string | dappID                         |
 
 ### 成功返回示例
 
-
 ```json
 {
-    "errCode": 0,
-    "errMsg": "",
-    "errDlt": "",
-    "data": {
-        "groupInfo": {
-            "groupID": "1306496076",
-            "groupName": "abc",
-            "notification": "abc",
-            "introduction": "acb",
-            "faceURL": "abc",
-            "ownerUserID": "65386e3a57fdf1e72485393f",
-            "createTime": 1700223341417,
-            "creatorUserID": "65386e3a57fdf1e72485393f",
-            "groupType": 3,
-            "notificationUpdateTime": 1700277494834,
-            "notificationUserID": "65386e3a57fdf1e72485393f",
-            "conditionType": 2,
-            "condition": "0.01",
-            "groupCategoryID": "1899831688",
-            "serverID": "1515471845"
-        },
-        "dapp": {
-            "ID": 2,
-            "groupID": "1306496076",
-            "dappID": "abc",
-            "createTime": 1700275425149
-        }
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "groupInfo": {
+      "groupID": "1306496076",
+      "groupName": "abc",
+      "notification": "abc",
+      "introduction": "acb",
+      "faceURL": "abc",
+      "ownerUserID": "65386e3a57fdf1e72485393f",
+      "createTime": 1700223341417,
+      "creatorUserID": "65386e3a57fdf1e72485393f",
+      "groupType": 3,
+      "notificationUpdateTime": 1700277494834,
+      "notificationUserID": "65386e3a57fdf1e72485393f",
+      "conditionType": 2,
+      "condition": "0.01",
+      "groupCategoryID": "1899831688",
+      "serverID": "1515471845"
+    },
+    "dapp": {
+      "ID": 2,
+      "groupID": "1306496076",
+      "dappID": "abc",
+      "createTime": 1700275425149
     }
+  }
 }
 ```
+
 ### 成功返回示例的参数说明
 
-
-|参数名|类型|说明|
-|:----    |:-------    |:--- |
-|errCode|int|错误码,0表示成功|
-|errMsg|string|错误简要信息,无错误时为空|
-|errDlt|errDlt|错误详细信息,无错误时为空|
-|data|object|通用数据对象，具体结构见下方|
-|groupInfo.groupID|string|房间ID|
-|groupInfo.groupName|string|房间名称|
-|groupInfo.groupType|number|房间类型 - IM用|
-|groupInfo.conversationID|string|会话ID|
-|groupInfo.conversationType|number|会话类型|
-|groupInfo.conditionType|number|token类型 1- ETMP|
-|groupInfo.condition|string|token数量|
-|groupInfo.GroupCategoryID|string|分组ID|
-|groupInfo.ServerID|string|部落ID|
-|groupInfo.GroupMode|number|房间类型 1-聊天房间 2-应用房间|
-|groupInfo.dapp|object|应用数据|
-|dapp.dappID|string|dappID|
+| 参数名                     | 类型   | 说明                           |
+| :------------------------- | :----- | :----------------------------- |
+| errCode                    | int    | 错误码,0 表示成功              |
+| errMsg                     | string | 错误简要信息,无错误时为空      |
+| errDlt                     | errDlt | 错误详细信息,无错误时为空      |
+| data                       | object | 通用数据对象，具体结构见下方   |
+| groupInfo.groupID          | string | 房间 ID                        |
+| groupInfo.groupName        | string | 房间名称                       |
+| groupInfo.groupType        | number | 房间类型 - IM 用               |
+| groupInfo.conversationID   | string | 会话 ID                        |
+| groupInfo.conversationType | number | 会话类型                       |
+| groupInfo.conditionType    | number | token 类型 1- ETMP             |
+| groupInfo.condition        | string | token 数量                     |
+| groupInfo.GroupCategoryID  | string | 分组 ID                        |
+| groupInfo.ServerID         | string | 部落 ID                        |
+| groupInfo.GroupMode        | number | 房间类型 1-聊天房间 2-应用房间 |
+| groupInfo.dapp             | object | 应用数据                       |
+| dapp.dappID                | string | dappID                         |
 
 ### 失败返回示例
-
 
 ```json
 {
@@ -128,11 +126,11 @@ hide_title: true
   "errDlt": ": [1004]RecordNotFoundError"
 }
 ```
+
 ### 失败返回示例的参数说明
 
-
-|参数名|类型|说明|
-|:----    |:-------    |:--- |
-|errCode|int|错误码,具体查看全局错误码文档|
-|errMsg|string|错误简要信息|
-|errDlt|errDlt|错误详细信息|
+| 参数名  | 类型   | 说明                          |
+| :------ | :----- | :---------------------------- |
+| errCode | int    | 错误码,具体查看全局错误码文档 |
+| errMsg  | string | 错误简要信息                  |
+| errDlt  | errDlt | 错误详细信息                  |
