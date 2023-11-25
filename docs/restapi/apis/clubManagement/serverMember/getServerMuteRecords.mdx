@@ -1,23 +1,23 @@
 ---
 sidebar_position: 1
-title: 获取黑名单列表
+title: 获取部落禁言名单
 hide_title: true
 ---
 
 <center>
 
-## 创建分组
+## 获取部落禁言名单
 
 </center>
 
 ### 简要描述
 
-- 获取黑名单列表
+- 获取部落禁言名单
 - `post`
 
 ### 请求 URL
 
-- `http://x.x.x.x:10002/club/get_server_black_list`
+- `http://x.x.x.x:10002/club/get_server_mute_records`
 
 ### Header
 
@@ -54,14 +54,25 @@ hide_title: true
   "errDlt": "",
   "data": {
     "total": 1,
-    "blacks": [
+    "records": [
       {
-        "serverID": "499038287",
-        "blockUserID": "10010",
-        "createTime": 1700106602485,
-        "operatorUserID": "65386e3a57fdf1e72485393f",
-        "nickname": "usera",
-        "faceUrl": "yourFaceURL"
+        "muteRecord": {
+          "serverID": "499038287",
+          "blockUserID": "10010",
+          "createTime": 1700106602485,
+          "operatorUserID": "65386e3a57fdf1e72485393f",
+          "muteEndTime": 1700106602485
+        },
+        "operatorUser": {
+          "userID": "",
+          "nickname": "",
+          "faceURL": ""
+        },
+        "blockUser": {
+          "userID": "",
+          "nickname": "",
+          "faceURL": ""
+        }
       }
     ]
   }
@@ -77,12 +88,17 @@ hide_title: true
 | errDlt         | errDlt | 错误详细信息,无错误时为空    |
 | data           | object | 通用数据对象，具体结构见下方 |
 | total          | number | 总记录数                     |
-| blacks         | Array  | 黑名单列表                   |
-| serverID       | string | 部落 ID                      |
-| blockUserID    | string | 被拉黑用户 ID                |
+| records        | Array  | 禁言列表                     |
+| muteRecord     | Object | 禁言基本数据                 |
+| blockUserID    | string | 被禁言用户 ID                |
 | operatorUserID | string | 操作用户 ID                  |
+| serverID       | string | 部落 ID                      |
+| createTime     | number | 操作时间                     |
+| muteEndTime    | number | 禁言结束时间                 |
+| operatorUser   | Object | 操作用户                     |
+| userID         | string | 用户 ID                      |
 | nickname       | string | 昵称                         |
-| faceUrl        | string | 头像                         |
+| faceURL        | string | 头像                         |
 
 ### 失败返回示例
 
