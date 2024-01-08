@@ -403,9 +403,9 @@ func IsBeBlock(ctx context.Context, owner_block_id string) (bool, error)
 
 用户申请加入部落，拥有管理部落成员权限的用户将会收到 contentType 为 1803 的消息，消息负载数据结构如下
 
-当管理员通过、拒绝申请之后，将会更改本地消息记录，将handleResult该为相应状态值
+当管理员通过、拒绝申请之后，将会更改本地消息记录，将 handleResult 该为相应状态值
 
-当某个管理员通过申请后，其他管理员再次点击通过申请，将会收到错误码为1206的错误提示
+当某个管理员通过申请后，其他管理员再次点击通过申请，将会收到错误码为 1206 的错误提示
 
 | 名称         | 类型                                              | 描述       |
 | ------------ | ------------------------------------------------- | ---------- |
@@ -435,3 +435,141 @@ func IsBeBlock(ctx context.Context, owner_block_id string) (bool, error)
 | opUser     | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 处理人信息           |
 | handleMsg  | string                                            | 处理信息             |
 | receiverAs | int32                                             | 1 admin/ 0 applicant |
+
+## 修改用户新消息提醒设置
+
+### 功能介绍
+
+:::info 说明
+修改用户设置
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SetUserAllowBeep(callback open_im_sdk_callback.Base, operationID string, opt int)
+func SetUserAllowVibration(callback open_im_sdk_callback.Base, operationID string, opt int)
+func SetUserAllowPushContent(callback open_im_sdk_callback.Base, operationID string, opt int)
+func SetUserAllowOnlinePush(callback open_im_sdk_callback.Base, operationID string, opt int)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述            |
+| -------- | -------- | -------- | --------------- |
+| opt      | int      | 是       | 1-允许 2-不允许 |
+
+### 返回结果
+
+| 名称 | 类型 | 描述 |
+| ---- | ---- | ---- |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.setUserAllowBeep(ParamsUtil.buildOperationID(), 2)
+ Open_im_sdk.setUserAllowVibration(ParamsUtil.buildOperationID(), 2)
+ Open_im_sdk.setUserAllowPushContent(ParamsUtil.buildOperationID(), 2)
+ Open_im_sdk.setUserAllowOnlinePush(ParamsUtil.buildOperationID(), 2)
+```
+
+## 获取指定部落消息未读数
+
+### 功能介绍
+
+:::info 说明
+获取指定部落消息未读数，设置了免打扰的房间不纳入计数
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func GetServerConversationUnreadCount(callback open_im_sdk_callback.Base, operationID string, serverID string)
+```
+
+### 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述    |
+| -------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述       |
+| ---- | ---- | ---------- |
+| ~    | int  | 消息未读数 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.getServerConversationUnreadCount(ParamsUtil.buildOperationID(), "123456")
+```
+
+## 获取消息定时清理配置
+
+### 功能介绍
+
+:::info 说明
+获取指定会话消息清理配置
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func GetConversationAutoDeleteMsgCycle(callback open_im_sdk_callback.Base, operationID string, conversationID string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| conversationID | string   | 是       | 会话 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+| ~    | int  | 定时清理配置 1-不清理 2->7,对应 1->6 天, 8->10 1->3 周，11-一个月 |
+
+### 代码示例
+
+```go showLineNumbers
+ GetConversationAutoDeleteMsgCycle(ParamsUtil.buildOperationID(), "svg_850472157")
+```
+
+## 修改消息定时清理配置
+
+### 功能介绍
+
+:::info 说明
+修改指定会话消息清理配置
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SetConversationAutoDeleteMsg(callback open_im_sdk_callback.Base, operationID string, conversationID string, cronCycle int)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- | ----------------------------------------------------------------- |
+| conversationID | string   | 是       | 部落 ID |
+| cronCycle      | int      | 是       |         | 定时清理配置 1-不清理 2->7,对应 1->6 天, 8->10 1->3 周，11-一个月 |
+
+### 返回结果
+
+| 名称 | 类型 | 描述       |
+| ---- | ---- | ---------- |
+| ~    | int  | 消息未读数 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.SetConversationAutoDeleteMsg(ParamsUtil.buildOperationID(),  "svg_850472157", 2)
+```

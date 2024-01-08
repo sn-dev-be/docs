@@ -44,23 +44,29 @@ hide_title: true
     "searchable": 1,
     "userMutualAccessible": 1,
     "dappID": "123456",
+    "communityName": "new name",
+    "communityBanner": "www",
+    "communityViewMode": 2
   }
 }
 ```
 
-| 字段名                                | 选填 | 类型   | 说明                                                                                                                                  |
-| :------------------------------------ | :--- | :----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| serverInfoForSet                      | 必填 | object | 部落信息对象                                                                                                                          |
-| serverInfoForSet.serverID             | 必填 | string | 要修改的部落 ID                                                                                                                       |
-| serverInfoForSet.serverName           | 选填 | string | 新部落名                                                                                                                              |
-| serverInfoForSet.icon                 | 选填 | string | 新部落头像                                                                                                                            |
-| serverInfoForSet.description          | 选填 | string | 新部落介绍                                                                                                                            |
-| serverInfoForSet.banner               | 选填 | string | 新部落封面图                                                                                                                            |
-| serverInfoForSet.ex                   | 选填 | string | 新部落扩展字段                                                                                                                        |
+| 字段名                                | 选填 | 类型   | 说明                                                       |
+| :------------------------------------ | :--- | :----- | ---------------------------------------------------------- |
+| serverInfoForSet                      | 必填 | object | 部落信息对象                                               |
+| serverInfoForSet.serverID             | 必填 | string | 要修改的部落 ID                                            |
+| serverInfoForSet.serverName           | 选填 | string | 新部落名                                                   |
+| serverInfoForSet.icon                 | 选填 | string | 新部落头像                                                 |
+| serverInfoForSet.description          | 选填 | string | 新部落介绍                                                 |
+| serverInfoForSet.banner               | 选填 | string | 新部落封面图                                               |
+| serverInfoForSet.ex                   | 选填 | string | 新部落扩展字段                                             |
 | serverInfoForSet.applyMode            | 选填 | int    | 进部落是否需要验证；0：所有人进部落需要验证，1：直接进部落 |
-| serverInfoForSet.searchable           | 选填 | int    | 是否能搜索落；0：不允许搜索，1：允许搜索                                                        |
-| serverInfoForSet.userMutualAccessible | 选填 | int    | 是否能查看用户信息；0：不允许查看部落成员信息，1：允许查看                                                                    |
-| serverInfoForSet.dappID               | 选填 | string    | 部落推荐应用                                                                    |
+| serverInfoForSet.searchable           | 选填 | int    | 是否能搜索落；0：不允许搜索，1：允许搜索                   |
+| serverInfoForSet.userMutualAccessible | 选填 | int    | 是否能查看用户信息；0：不允许查看部落成员信息，1：允许查看 |
+| serverInfoForSet.dappID               | 选填 | string | 部落推荐应用                                               |
+| serverInfoForSet.communityName        | 选填 | string | 部落社区名称                                               |
+| serverInfoForSet.communityBanner      | 选填 | string | 部落社区背景图                                             |
+| serverInfoForSet.communityViewMode    | 选填 | number | 社区是否公开 1-公开 0-隐私                                 |
 
 ### 成功返回示例
 
