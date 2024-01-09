@@ -1,0 +1,89 @@
+---
+title: 0.0.3
+hide_title: false
+sidebar_position: 1
+---
+
+## [消息类型](docs/sdks/enum/messageContentType.mdx)
+
+| 枚举值 | 描述             |
+| ------ | ---------------- |
+| 1653   | 定时清理开关通知 |
+
+## 获取指定会话消息定时清理周期
+
+### 功能介绍
+
+:::info 说明
+设置指定会话消息定时清理周期
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func GetConversationAutoDeleteMsgCycle(callback open_im_sdk_callback.Base, operationID string, conversationID string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| conversationID | string   | 是       | 会话 ID |
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+| ~    | int  | 定时清理配置 1-不清理 2->7,对应 1->6 天, 8->10 1->3 周，11-一个月 |
+
+### 代码示例
+
+```go showLineNumbers
+ GetConversationAutoDeleteMsgCycle(ParamsUtil.buildOperationID(), "svg_850472157")
+```
+
+## 设置指定会话消息定时清理周期
+
+### 功能介绍
+
+:::info 说明
+设置指定会话消息定时清理周期
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SetConversationAutoDeleteMsg(callback open_im_sdk_callback.Base, operationID string, conversationID string, cronCycle int)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- | ----------------------------------------------------------------- |
+| conversationID | string   | 是       | 部落 ID |
+| cronCycle      | int      | 是       |         | 定时清理配置 1-不清理 2->7,对应 1->6 天, 8->10 1->3 周，11-一个月 |
+
+### 返回结果
+
+| 名称 | 类型 | 描述       |
+| ---- | ---- | ---------- |
+| ~    | int  | 消息未读数 |
+
+### 代码示例
+
+```go showLineNumbers
+ Open_im_sdk.SetConversationAutoDeleteMsg(ParamsUtil.buildOperationID(),  "svg_850472157", 2)
+```
+
+## 消息定时清理通知事件
+
+当会话开启或关闭定时清理，会下发 contentType 为 1653 的通知
+
+[CronMsgClearInfo](docs/sdks/class/message/.mdx)
+
+| 名称      | 类型                                              | 描述                                                              |
+| --------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| cronCycle | int32                                             | 定时清理周期 1-不清理 2->7,对应 1->6 天, 8->10 1->3 周，11-一个月 |
+| opUser    | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 操作用户                                                          |
