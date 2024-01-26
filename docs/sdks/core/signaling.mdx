@@ -52,6 +52,7 @@ Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
 | -------------- | ------------------------------------------------- | -------------------- |
 | channelID      | string                                            | 频道 id              |
 | user           | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户                 |
+| participants   | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 语音房成员数组       |
 | remainingSec   | int32                                             | 语音房剩余时间(秒)   |
 | elapsedSec     | int32                                             | 语音房持续时间       |
 | micphoneStatus | int32                                             | 麦克风状态 1 开/2 关 |
@@ -209,5 +210,5 @@ func GetRtcToken(
     userID string,
     channelID string,
     roleType int32,
-)
+) (token string)
 ```
