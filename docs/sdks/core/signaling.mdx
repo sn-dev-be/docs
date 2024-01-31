@@ -48,13 +48,14 @@ Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
 
 [SignalVoiceInfo](docs/sdks/class/message/.mdx)
 
-| 名称         | 类型                                              | 描述               |
-| ------------ | ------------------------------------------------- | ------------------ |
-| channelID    | string                                            | 频道 id            |
-| opUser       | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户               |
-| participants | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 语音房成员数组     |
-| remainingSec | int32                                             | 语音房剩余时间(秒) |
-| elapsedSec   | int32                                             | 语音房持续时间     |
+| 名称           | 类型                                              | 描述               |
+| -------------- | ------------------------------------------------- | ------------------ |
+| channelID      | string                                            | 频道 id            |
+| opUser         | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户               |
+| participants   | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 语音房成员数组     |
+| remainingSec   | int32                                             | 语音房剩余时间(秒) |
+| elapsedSec     | int32                                             | 语音房持续时间     |
+| conversationID | string                                            | 会话 id            |
 
 ### 代码示例
 
@@ -155,8 +156,15 @@ func SignalingHungUp(
 
 如果是单聊，挂断时会推送关闭消息，contentType 为 1615
 
-### 关闭语音房
+[SignalVoiceSingleChatInfo](docs/sdks/class/message/.mdx)
 
+| 名称       | 类型  | 描述           |
+| ---------- | ----- | -------------- |
+| elapsedSec | int32 | 语音房持续时间 |
+
+## ~~关闭语音房~~
+
+无需调用该方法，服务端在通话满一小时会立马推送关闭通知，客户端收到close的事件回掉后，断开与声网的连接即可
 ```go
 func SignalingClose(
     callback open_im_sdk_callback.Base,
