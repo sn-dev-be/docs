@@ -57,6 +57,16 @@ Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
 | elapsedSec     | int32                                             | 语音房持续时间     |
 | conversationID | string                                            | 会话 id            |
 
+拒绝、取消、挂断在单聊时除了正常的信令事件回调，还会发送一条单聊消息，数据结构如下
+
+[SignalVoiceSingleChatInfo](docs/sdks/class/message/.mdx)
+
+| 名称       | 类型   | 描述           |
+| ---------- | ------ | -------------- |
+| elapsedSec | int32  | 语音房持续时间 |
+| opUserID   | string | 操作用户 id    |
+
+
 ### 代码示例
 
 ```go
@@ -156,15 +166,10 @@ func SignalingHungUp(
 
 如果是单聊，挂断时会推送关闭消息，contentType 为 1615
 
-[SignalVoiceSingleChatInfo](docs/sdks/class/message/.mdx)
-
-| 名称       | 类型  | 描述           |
-| ---------- | ----- | -------------- |
-| elapsedSec | int32 | 语音房持续时间 |
-
 ## ~~关闭语音房~~
 
-无需调用该方法，服务端在通话满一小时会立马推送关闭通知，客户端收到close的事件回掉后，断开与声网的连接即可
+无需调用该方法，服务端在通话满一小时会立马推送关闭通知，客户端收到 close 的事件回掉后，断开与声网的连接即可
+
 ```go
 func SignalingClose(
     callback open_im_sdk_callback.Base,
