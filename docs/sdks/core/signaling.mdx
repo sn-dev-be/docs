@@ -41,6 +41,9 @@ openim 只提供操作信令的收发
 // android举例
 Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
 ```
+### 错误说明
+
+当对已经不存在的语音房间，进行挂断、拒绝、取消等操作时，将会返回错误码为1801的错误
 
 ### 信令数据结构
 
@@ -85,11 +88,14 @@ func SignalingInvite(
     callback open_im_sdk_callback.Base,
     operationID string,
     conversationID string,
-    userIDList string
+    userID string,
+    channelID string,
 ) (channelID string)
 ```
 
-发送邀请后，返回 channelID
+首次邀请，channelID不需要传递，如需再次邀请他人加入同一个语音房，需要传递channelID
+
+发送邀请后，返回 channelID，如果邀请人正在通话中或者被邀请中，将会返回错误码为1802的错误
 
 如果是群聊邀请，除了被邀请人会收到邀请通知，群内同时也会推送卡片消息，卡片消息数据结构如下，卡片消息 contentType 为 1611
 
