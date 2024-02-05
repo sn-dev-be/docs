@@ -99,6 +99,8 @@ func SignalingInvite(
 
 如果是群聊邀请，除了被邀请人会收到邀请通知，群内同时也会推送卡片消息，卡片消息数据结构如下，卡片消息 contentType 为 1611
 
+如果发送邀请后，对方60秒内没有接受邀请，将会推送关闭通知
+
 [SignalGroupVoiceCardInfo](docs/sdks/class/message/.mdx)
 
 | 名称       | 类型                                              | 描述          |
