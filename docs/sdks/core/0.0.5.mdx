@@ -1,0 +1,40 @@
+---
+title: 0.0.5
+hide_title: false
+sidebar_position: 1
+---
+
+## [语言类型](/sdks/enum/languageType)
+
+## 设置语言类型
+用户每次登陆之后又要上传当前语言类型
+
+### 功能介绍
+
+:::info 说明
+设置当前语言类型
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SetUserLanguage(callback open_im_sdk_callback.Base, operationID string, language string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| language | string   | 是       | 语言类型, 参照上面链接中枚举值|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ SetUserLanguage(ParamsUtil.buildOperationID(), "zh_CN")
+```

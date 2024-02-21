@@ -1,0 +1,76 @@
+---
+title: 0.0.4
+hide_title: false
+sidebar_position: 1
+---
+
+## [消息类型](docs/sdks/enum/messageContentType.mdx)
+
+| 枚举值 | 描述             |
+| ------ | ---------------- |
+| 1653   | 定时清理开关通知 |
+
+## 获取对话框是否允许发送消息
+
+### 功能介绍
+
+:::info 说明
+获取对话框是否允许发送消息
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func AllowedSendMsg(callback open_im_sdk_callback.Base, operationID string, targetUserID string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| targetUserID | string   | 是       | 目标用户 ID json 数组 |
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+| ~    | int  | 1-可以 0-不可以 |
+
+### 代码示例
+
+```go showLineNumbers
+ AllowedSendMsg(ParamsUtil.buildOperationID(), "123456")
+```
+
+## 设置陌生人免打扰
+
+### 功能介绍
+
+:::info 说明
+设置陌生人免打扰
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func SetUserAllowStrangerMsg(callback open_im_sdk_callback.Base, operationID string, opt int32)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| opt | int32   | 是       | 1-开启 2-关闭 |
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ SetUserAllowStrangerMsg(ParamsUtil.buildOperationID(), 2)
+```

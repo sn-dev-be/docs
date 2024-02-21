@@ -43,9 +43,8 @@ values={[
 | allowVibration   | int      | 新消息提醒震动 1-开启 2-关闭                                       |
 | allowPushContent | int      | 新消息提醒聊天内容 1-开启 2-关闭                                   |
 | allowOnlinePush  | int      | 新消息应用内推送 1-开启 2-关闭                                     |
-
-    AllowPushContent int32  `gorm:"column:allow_push_content" json:""`
-    AllowOnlinePush  int32  `gorm:"column:allow_online_push" json:""`
+| allowStrangerMsg | int                                                    | 陌生人防打扰 1-开启 2-关闭       |
+| language         | string                                                 | 语言                             |
 
 </TabItem>
 
@@ -67,7 +66,8 @@ values={[
 | allowVibration   | int                                                   | 新消息提醒震动 1-开启 2-关闭     |
 | allowPushContent | int                                                   | 新消息提醒聊天内容 1-开启 2-关闭 |
 | allowOnlinePush  | int                                                   | 新消息应用内推送 1-开启 2-关闭   |
-
+| allowStrangerMsg | int                                                    | 陌生人防打扰 1-开启 2-关闭       |
+| language         | string                                                 | 语言                             |
 </TabItem>
 
 <TabItem value="Android">
@@ -95,7 +95,8 @@ values={[
 | allowVibration   | int                                                   | 新消息震动 1：允许，2：否                                          |
 | allowPushContent | int                                                   | 新消息提醒聊天内容 1-开启 2-关闭                                   |
 | allowOnlinePush  | int                                                   | 新消息应用内推送 1-开启 2-关闭                                     |
-
+| allowStrangerMsg | int                                                    | 陌生人防打扰 1-开启 2-关闭       |
+| language         | string                                                 | 语言                             |
 </TabItem>
 
 <TabItem value="Web">
@@ -116,7 +117,8 @@ values={[
 | allowVibration   | int                                                    | 新消息震动 1：允许，2：否        |
 | allowPushContent | int                                                    | 新消息提醒聊天内容 1-开启 2-关闭 |
 | allowOnlinePush  | int                                                    | 新消息应用内推送 1-开启 2-关闭   |
-
+| allowStrangerMsg | int                                                    | 陌生人防打扰 1-开启 2-关闭       |
+| language         | string                                                 | 语言                             |
 </TabItem>
 
 <TabItem value="uni-app">
@@ -137,6 +139,8 @@ values={[
 | allowVibration   | int                                                    | 新消息震动 1：允许，2：否        |
 | allowPushContent | int                                                    | 新消息提醒聊天内容 1-开启 2-关闭 |
 | allowOnlinePush  | int                                                    | 新消息应用内推送 1-开启 2-关闭   |
+| allowStrangerMsg | int                                                    | 陌生人防打扰 1-开启 2-关闭       |
+| language         | string                                                 | 语言                             |
 
 </TabItem>
 
