@@ -6,22 +6,24 @@ sidebar_position: 1
 
 ## [消息类型](docs/sdks/enum/messageContentType.mdx)
 
-| 枚举值 | 描述                 |
-| ------ | -------------------- |
-| 1602   | 邀请语音通话通知     |
-| 201    | 群语音卡片消息       |
-| 1603   | 接受语音通话通知     |
-| 1604   | 拒绝语音通话通知     |
-| 1612   | 拒绝语音通话单聊消息 |
-| 1605   | 加入语音通话通知     |
-| 1613   | 群语音加入消息       |
-| 1606   | 取消语音通话通知     |
-| 1614   | 取消语音通话单聊消息 |
-| 1607   | 挂掉语音通话通知     |
-| 1615   | 关闭语音通话单聊消息 |
-| 1609   | 关闭语音通话通知     |
-| 1608   | 麦克风状态改变通知   |
-| 1610   | 说话状态改变通知     |
+| 枚举值 | 描述                     |
+| ------ | ------------------------ |
+| 1602   | 邀请语音通话通知         |
+| 1611   | 群语音卡片消息           |
+| 1603   | 接受语音通话通知         |
+| 1604   | 拒绝语音通话通知         |
+| 1612   | 拒绝语音通话单聊消息     |
+| 1605   | 加入语音通话通知         |
+| 1613   | 群语音加入消息           |
+| 1606   | 取消语音通话通知         |
+| 1614   | 取消语音通话单聊消息     |
+| 1607   | 挂掉语音通话通知         |
+| 1615   | 关闭语音通话单聊消息     |
+| 1609   | 关闭语音通话通知         |
+| 1608   | 麦克风状态改变通知       |
+| 1610   | 说话状态改变通知         |
+| 1616   | 单聊 60 秒未应答通知     |
+| 1617   | 异常关闭语音通话单聊消息 |
 
 ## 语音通话
 
@@ -42,19 +44,33 @@ openim 只提供操作信令的收发
 Open_im_sdk.setSignalingListener(new _SignalingListener(listener))
 ```
 
+### 错误说明
+
+当对已经不存在的语音房间，进行挂断、拒绝、取消等操作时，将会返回错误码为 1801 的错误
+
 ### 信令数据结构
 
-所有信令事件回调返回统一数据结构
+所有信令事件回调返回统一数据结构，除麦克风状态改变、和说话状态改变外
 
-[SignalVoiceInfo](docs/sdks/class/message/SingalVoiceInfo.mdx)
+[SignalVoiceInfo](docs/sdks/class/message/.mdx)
 
-| 名称           | 类型                                              | 描述                 |
-| -------------- | ------------------------------------------------- | -------------------- |
-| channelID      | string                                            | 频道 id              |
-| user           | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户                 |
-| remainingSec   | int32                                             | 语音房剩余时间(秒)   |
-| elapsedSec     | int32                                             | 语音房持续时间       |
-| micphoneStatus | int32                                             | 麦克风状态 1 开/2 关 |
+| 名称           | 类型                                              | 描述               |
+| -------------- | ------------------------------------------------- | ------------------ |
+| channelID      | string                                            | 频道 id            |
+| opUser         | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户               |
+| participants   | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 语音房成员数组     |
+| remainingSec   | int32                                             | 语音房剩余时间(秒) |
+| elapsedSec     | int32                                             | 语音房持续时间     |
+| conversationID | string                                            | 会话 id            |
+
+拒绝、取消、挂断在单聊时除了正常的信令事件回调，还会发送一条单聊消息，数据结构如下
+
+[SignalVoiceSingleChatInfo](docs/sdks/class/message/.mdx)
+
+| 名称       | 类型   | 描述           |
+| ---------- | ------ | -------------- |
+| elapsedSec | int32  | 语音房持续时间 |
+| opUserID   | string | 操作用户 id    |
 
 ### 代码示例
 
@@ -74,15 +90,20 @@ func SignalingInvite(
     callback open_im_sdk_callback.Base,
     operationID string,
     conversationID string,
-    userIDList string
+    userID string,
+    channelID string,
 ) (channelID string)
 ```
 
-发送邀请后，返回 channelID
+首次邀请，channelID 不需要传递，如需再次邀请他人加入同一个语音房，需要传递 channelID
 
-如果是群聊邀请，除了被邀请人会收到邀请通知，群内同时也会推送卡片消息，卡片消息数据结构如下，卡片消息 contentType 为 201
+发送邀请后，返回 channelID，如果邀请人正在通话中或者被邀请中，将会返回错误码为 1802 的错误
 
-[SignalVoiceGroupInfo](docs/sdks/class/message/.mdx)
+如果是群聊邀请，除了被邀请人会收到邀请通知，群内同时也会推送卡片消息，卡片消息数据结构如下，卡片消息 contentType 为 1611
+
+如果发送邀请后，对方 60 秒内没有接受邀请，将会推送 contentType 为 1616 的单聊未应答通知
+
+[SignalGroupVoiceCardInfo](docs/sdks/class/message/.mdx)
 
 | 名称       | 类型                                              | 描述          |
 | ---------- | ------------------------------------------------- | ------------- |
@@ -150,10 +171,16 @@ func SignalingHungUp(
     operationID string,
     conversationID string,
     channelID string,
+    hungUpType int,
 )
 ```
+hungUpType为挂断类型，1为正常情况挂断，2为异常情况挂断。异常场景如正在语音通话中，此时收到来电提醒等非主动取消的情况
 
-### 关闭语音房
+如果是单聊，正常挂断时会推送关闭消息，contentType 为 1615，异常挂断contentType 为 1617
+
+## ~~关闭语音房~~
+
+无需调用该方法，服务端在通话满一小时会立马推送关闭通知，客户端收到 close 的事件回掉后，断开与声网的连接即可
 
 ```go
 func SignalingClose(
@@ -168,19 +195,34 @@ func SignalingClose(
 
 ### 更新麦克风状态
 
+[SignalVoiceMicphoneStatusInfo](docs/sdks/class/message/.mdx)
+
+| 名称           | 类型                                              | 描述                 |
+| -------------- | ------------------------------------------------- | -------------------- |
+| channelID      | string                                            | 频道 id              |
+| opUser         | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户                 |
+| micphoneStatus | int32                                             | 麦克风状态 1 开/2 关 |
+
 ```go
 func UpdateMichoneStatus(
     callback open_im_sdk_callback.Base,
     operationID string,
     conversationID string,
     channelID string,
-    status int
+    status int32,
 )
 ```
 
 ### 更新说话状态
 
 检测到连续说话超过 3 秒以上，才调用该方法，避免频繁调用
+
+[SignalVoiceSpeakStatusInfo](docs/sdks/class/message/.mdx)
+
+| 名称      | 类型                                              | 描述    |
+| --------- | ------------------------------------------------- | ------- |
+| channelID | string                                            | 频道 id |
+| opUser    | [PublicInfo](docs/sdks/class/user/publicInfo.mdx) | 用户    |
 
 ```go
 func UpdateSpeakStatus(
@@ -209,5 +251,5 @@ func GetRtcToken(
     userID string,
     channelID string,
     roleType int32,
-)
+) (token string)
 ```
