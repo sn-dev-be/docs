@@ -50,16 +50,19 @@ values={[
 
 ```dart showLineNumbers
   OpenIM.iMManager.groupManager.setClubListener(OnClubListener(
-      onClubApplicationAccepted: (ClubApplicationInfo info){},
-      onClubApplicationAdded: (ClubApplicationInfo info){},
-      onClubApplicationDeleted: (ClubApplicationInfo info){},
-      onClubApplicationRejected: (ClubApplicationInfo info){},
-      onClubInfoChanged: (ClubInfo info){},
-      onClubMemberAdded: (ClubMembersInfo info){},
-      onClubMemberDeleted: (ClubMembersInfo info){},
-      onClubMemberInfoChanged: (ClubMembersInfo info){},
-      onJoinedClubAdded: (ClubInfo info){},
-      onJoinedClubDeleted: (ClubInfo info){},
+    onJoinedServerAdded(serverInfo string){},
+	onJoinedServerDeleted(serverInfo string){},
+	onServerMemberAdded(serverMemberInfo string){},
+	onServerMemberDeleted(serverMemberInfo string){},
+	onServerApplicationAdded(serverApplication string){},
+	onServerApplicationDeleted(serverApplication string){},
+	onServerInfoChanged(serverInfo string){},
+	onServerDismissed(serverID string){},
+	onServerMemberInfoChanged(serverMemberInfo string){},
+	onServerApplicationAccepted(serverApplication string){},
+	onServerApplicationRejected(serverApplication string){},
+	onServerGroupDismissed(groupInfo string){},
+	onServerMemberKicked(serverID string){},
     ));
 ```
 
@@ -112,56 +115,77 @@ values={[
 ```java showLineNumbers
 OpenIMClient.getInstance().groupManager.setOnClubListener(new OnClubListener() {
             @Override
-            public void onClubApplicationAccepted(ClubApplicationInfo info) {
+            public void onServerApplicationAccepted(ServerApplicationInfo info) {
 
             }
 
             @Override
-            public void onClubApplicationAdded(ClubApplicationInfo info) {
+            public void onServerApplicationAdded(ServerApplicationInfo info) {
 
             }
 
             @Override
-            public void onClubApplicationDeleted(ClubApplicationInfo info) {
+            public void onServerApplicationDeleted(ServerApplicationInfo info) {
 
             }
 
             @Override
-            public void onClubApplicationRejected(ClubApplicationInfo info) {
+            public void onServerApplicationRejected(ServerApplicationInfo info) {
 
             }
 
             @Override
-            public void onClubInfoChanged(ClubInfo info) {
+            public void onServerInfoChanged(ServerInfo info) {
 
             }
 
             @Override
-            public void onClubMemberAdded(ClubMembersInfo info) {
+            public void onServerMemberAdded(ServerMembersInfo info) {
 
             }
 
             @Override
-            public void onClubMemberDeleted(ClubMembersInfo info) {
+            public void onServerMemberDeleted(ServerMembersInfo info) {
 
             }
 
             @Override
-            public void onClubMemberInfoChanged(ClubMembersInfo info) {
+            public void onServerMemberInfoChanged(ServerMembersInfo info) {
 
             }
 
             @Override
-            public void onJoinedClubAdded(ClubInfo info) {
+            public void onJoinedServerAdded(ServerInfo info) {
 
             }
 
             @Override
-            public void onJoinedClubDeleted(ClubInfo info) {
+            public void onJoinedServerDeleted(ServerInfo info) {
 
             }
+
+            @Override
+            public void onServerDismissed(String serverID){
+
+            }
+
+            @Override
+            public void onServerGroupDismissed(GroupInfo info){
+
+            }
+
+            @Override
+            public void onServerMemberKicked(String serverID){
+
+            }
+
         });
 ```
+### 返回结果
+
+| 参数名称 | 参数类型                                         | 描述     |
+| -------- | ------------------------------------------------ | -------- |
+| ~        | [GroupInfo](docs/sdks/class/group/groupInfo.mdx) | 成功返回 |
 
 </TabItem>
 

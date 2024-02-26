@@ -38,3 +38,73 @@ func SetUserLanguage(callback open_im_sdk_callback.Base, operationID string, lan
 ```go showLineNumbers
  SetUserLanguage(ParamsUtil.buildOperationID(), "zh_CN")
 ```
+
+## 同意部落申请
+
+### 功能介绍
+
+:::info 说明
+管理员通过用户的加入部落申请
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func AcceptServerApplication(callback open_im_sdk_callback.Base, operationID string, serverID string, fromUserID string, handleMsg string, conversationID string) 
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落ID|
+| fromUserID | string   | 是       | 申请用户ID|
+| handleMsg | string   | 是       | 处理意见|
+| conversationID | string   | 是       | 会话ID|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ AcceptServerApplication(ParamsUtil.buildOperationID(), "1468739744", "65bb4120bfeebfbec730da94", "", "si_65d2b56729ab59249c97f0c0_clubAdmin")
+```
+
+## 拒绝部落申请
+
+### 功能介绍
+
+:::info 说明
+管理员拒绝用户的加入部落申请
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func RefuseServerApplication(callback open_im_sdk_callback.Base, operationID string, serverID string, fromUserID string, handleMsg string, conversationID string) 
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落ID|
+| fromUserID | string   | 是       | 申请用户ID|
+| handleMsg | string   | 是       | 处理意见|
+| conversationID | string   | 是       | 会话ID|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ RefuseServerApplication(ParamsUtil.buildOperationID(), "1468739744", "65bb4120bfeebfbec730da94", "", "si_65d2b56729ab59249c97f0c0_clubAdmin")
+```
