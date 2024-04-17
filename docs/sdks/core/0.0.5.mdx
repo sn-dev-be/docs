@@ -108,3 +108,111 @@ func RefuseServerApplication(callback open_im_sdk_callback.Base, operationID str
 ```go showLineNumbers
  RefuseServerApplication(ParamsUtil.buildOperationID(), "1468739744", "65bb4120bfeebfbec730da94", "", "si_65d2b56729ab59249c97f0c0_clubAdmin")
 ```
+
+## 解散部落
+
+### 功能介绍
+
+:::info 说明
+部落主解散部落
+
+**相关回调**:    
+[onServerDismissed](../callback/club/onServerDismissed)  
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func DismissServer(callback open_im_sdk_callback.Base, operationID string, serverID string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落ID|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ DismissServer(ParamsUtil.buildOperationID(), "1468739744")
+```
+
+## 解散部落房间
+
+### 功能介绍
+
+:::info 说明
+解散部落房间
+
+**相关回调**:    
+[onServerGroupDismissed](../callback/club/onServerGroupDismissed)  
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func DeleteServerGroup(callback open_im_sdk_callback.Base, operationID string, serverID string, groupIDs []string)
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落ID|
+| groupIDs | array   | 是       | 房间ID数组|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ DeleteServerGroup(ParamsUtil.buildOperationID(), "1468739744", []string{"65bb4120bfeebfbec730da94", "65d2b56729ab59249c97f0c0"})
+```
+
+## 踢出部落成员
+
+### 功能介绍
+
+:::info 说明
+踢出部落成员
+
+**相关回调**:    
+[onServerMemberKicked](../callback/club/onServerMemberKicked)  
+
+:::
+
+### 函数原型
+
+```go showLineNumbers
+func KickServerMember(callback open_im_sdk_callback.Base, operationID string, serverID, reason string, kickedUserIDs []string) 
+```
+
+### 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述    |
+| -------------- | -------- | -------- | ------- |
+| serverID | string   | 是       | 部落ID|
+| reason | string   | 否       | 踢出理由|
+| kickedUserIDs | array   | 是       | 被踢出成员ID数组|
+
+### 返回结果
+
+| 名称 | 类型 | 描述                                                              |
+| ---- | ---- | ----------------------------------------------------------------- |
+
+### 代码示例
+
+```go showLineNumbers
+ KickServerMember(ParamsUtil.buildOperationID(), "1468739744", "", []string{"65bb4120bfeebfbec730da94", "65d2b56729ab59249c97f0c0"})
+```
